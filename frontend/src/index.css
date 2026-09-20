@@ -500,6 +500,119 @@ button:disabled {
   min-width: 0; /* prevent flex blowout */
 }
 
+/* Product Header */
+.product-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.product-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.product-title {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 600;
+  letter-spacing: -0.9px;
+  color: var(--ink);
+  line-height: 1.15;
+}
+
+.product-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.btn-outline {
+  border: 1px solid var(--ink);
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  background: transparent;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-outline:hover:not(:disabled) {
+  background-color: rgba(19, 35, 43, 0.05);
+}
+
+.btn-text {
+  border: none;
+  background: transparent;
+  padding: 10px 16px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--slate);
+  transition: color 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-text:hover:not(:disabled) {
+  color: var(--ink);
+}
+
+.product-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 14px;
+  color: var(--slate);
+}
+
+/* Price Block */
+.price-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.big-price {
+  font-family: var(--font-display);
+  font-size: 52px;
+  font-weight: 600;
+  letter-spacing: -1.4px;
+  color: var(--ink);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.price-summary-sentence {
+  font-size: 15px;
+  color: var(--slate);
+  line-height: 1.4;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.price-change-text.live {
+  color: var(--live);
+}
+
+.price-change-text.red {
+  color: var(--red);
+}
+
+.price-change-text.slate {
+  color: var(--slate);
+}
+
+.price-failure-warning {
+  color: var(--red);
+}
+
 /* Waking up banner for cold-start */
 .wakeup-banner {
   background-color: var(--amber-tint);

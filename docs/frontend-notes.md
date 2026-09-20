@@ -24,4 +24,18 @@ This document logs design and implementation choices, adaptations, or edge-case 
   - Automatically hidden if fewer than 2 valid observations exist.
   - Rendered as SVG with `stroke-width: 1.5`, round joins and caps, stroke `--ink` when row is selected and `--muted` when unselected.
 
+## Step 4: Product Header & Price Block
+- **Product Header**:
+  - Title in Bricolage Grotesque 36px 600, letter-spacing -0.9px.
+  - Action buttons: "Scrape now" outline button with 60-second cooldown timer & disabled state during in-flight scrape; "Stop tracking" text button with confirmation dialog.
+  - Meta row: Product category and "Store ID {id}" in 14px `--slate` with 20px gap.
+- **Price Block**:
+  - Big price in Bricolage Grotesque 52px 600, letter-spacing -1.4px, showing the latest successful observation with exact decimal formatting (e.g. `₹12,723.00`). If no observation exists, shows "No price yet".
+  - Price summary sentence in 15px `--slate`:
+    - First part: dynamically calculated change vs. first observation in window (coloured `--live` if lower, `--red` if higher, `--slate` if unchanged) with range-responsive text ("than yesterday", "than a week ago", etc.).
+    - Second part: formatted stock state (e.g. "In stock, 14 left.").
+    - Third part: "Last checked X minutes ago." using last successful observation timestamp.
+    - Fourth part: If newest scrape attempt failed, displays "The latest check failed; showing the last good price." in `--red`.
+
+
 

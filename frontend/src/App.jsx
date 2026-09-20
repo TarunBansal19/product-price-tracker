@@ -3,6 +3,7 @@ import { BackendStatus } from './components/BackendStatus.jsx';
 import { SearchAutocomplete } from './components/SearchAutocomplete.jsx';
 import { TrackedRow } from './components/TrackedRow.jsx';
 import { EmptyState } from './components/EmptyState.jsx';
+import { ProductDetail } from './components/ProductDetail.jsx';
 import { api, subscribeWakeup } from './api.js';
 
 export function App() {
@@ -46,6 +47,10 @@ export function App() {
 
   const trackedStoreIds = new Set(
     trackedProducts.map((p) => String(p.store_product_id))
+  );
+
+  const selectedProduct = trackedProducts.find(
+    (p) => p.id === selectedProductId || String(p.store_product_id) === String(selectedProductId)
   );
 
   return (
@@ -98,7 +103,7 @@ export function App() {
             <TrackedRow
               key={product.id}
               product={product}
-              isSelected={selectedProductId === product.id}
+              isSelected={selectedProduct?.id === product.id}
               onSelect={(p) => setSelectedProductId(p.id)}
             />
           ))}
@@ -119,12 +124,17 @@ export function App() {
           </div>
         )}
 
-        {!selectedProductId ? (
+        {!selectedProduct ? (
           <EmptyState />
         ) : (
-          <div className="product-detail-placeholder">
-            {/* Will be implemented in Step 4 */}
-          </div>
+          <ProductDetail
+            product={selectedProduct}
+            onProductUpdated={fetchTrackedProducts}
+            onUntrack={() => {
+              setSelectedProductId(null);
+              fetchTrackedProducts();
+            }}
+          />
         )}
       </main>
     </div>
