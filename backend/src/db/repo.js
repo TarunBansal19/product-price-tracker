@@ -201,13 +201,18 @@ export const repo = {
     return data || [];
   },
 
-  async getTrackedProducts() {
+  async getTrackedProducts({ activeOnly = true } = {}) {
     const supabase = getSupabase();
-    // Fetch tracked products with their latest observation and attempt outcome
-    const { data: products, error: pErr } = await supabase
+    let q = supabase
       .from('tracked_products')
       .select('*')
       .order('added_at', { ascending: false });
+
+    if (activeOnly) {
+      q = q.eq('is_active', true);
+    }
+
+    const { data: products, error: pErr } = await q;
 
     if (pErr) throw new Error(`getTrackedProducts failed: ${pErr.message}`);
     if (!products || products.length === 0) return [];

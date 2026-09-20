@@ -30,10 +30,11 @@ const logQuerySchema = z.object({
   outcome: z.enum(['success', 'retried', 'failed']).optional()
 });
 
-// GET /api/tracked - List all tracked products
+// GET /api/tracked - List active tracked products
 trackedRouter.get('/', async (req, res, next) => {
   try {
-    const products = await repo.getTrackedProducts();
+    const activeOnly = req.query.all !== 'true';
+    const products = await repo.getTrackedProducts({ activeOnly });
     res.json({ products });
   } catch (err) {
     next(err);

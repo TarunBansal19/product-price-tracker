@@ -50,6 +50,15 @@ export function App() {
     // Optionally refresh tracked count if health updates
   };
 
+  const handleUntrack = (untrackedId) => {
+    const idToMatch = String(untrackedId || selectedProductId);
+    setTrackedProducts((prev) =>
+      prev.filter((p) => p.id !== idToMatch && String(p.store_product_id) !== idToMatch)
+    );
+    setSelectedProductId(null);
+    fetchTrackedProducts();
+  };
+
   const trackedStoreIds = new Set(
     trackedProducts.map((p) => String(p.store_product_id))
   );
@@ -160,10 +169,7 @@ export function App() {
           <ProductDetail
             product={selectedProduct}
             onProductUpdated={fetchTrackedProducts}
-            onUntrack={() => {
-              setSelectedProductId(null);
-              fetchTrackedProducts();
-            }}
+            onUntrack={handleUntrack}
           />
         )}
       </main>
