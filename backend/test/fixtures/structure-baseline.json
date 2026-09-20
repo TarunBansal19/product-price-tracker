@@ -1,0 +1,68 @@
+{
+  "generatedAt": "2026-09-20T16:36:11.534Z",
+  "fingerprintVersion": 1,
+  "fixturesAnalyzed": 12,
+  "validLayoutFixtures": 12,
+  "stableFingerprint": {
+    "hash": "a2a129356e2c399df00f3a0beee3d342f0a3009047840dfd84bf180ab1330733",
+    "layoutRevision": 627001,
+    "layoutVariant": 0,
+    "layoutKeys": [
+      "classes",
+      "order",
+      "priceCarrier",
+      "priceTag",
+      "ratingAria",
+      "revision",
+      "sellerTitle",
+      "validUntil",
+      "variant"
+    ],
+    "productApiKeys": [
+      "brand",
+      "category",
+      "description",
+      "id",
+      "name",
+      "reviews",
+      "sku",
+      "slug",
+      "specs"
+    ],
+    "domKeys": [
+      "blockHtml",
+      "blockText",
+      "candidates"
+    ]
+  },
+  "knownQuoteKeys": [
+    "b",
+    "c",
+    "dd",
+    "f",
+    "g",
+    "m",
+    "n",
+    "p",
+    "r",
+    "rc",
+    "s",
+    "sl",
+    "t",
+    "v",
+    "x"
+  ],
+  "coreQuoteKeys": [
+    "c",
+    "p",
+    "s",
+    "t"
+  ],
+  "knownPriceApiKeys": [
+    "e",
+    "error",
+    "productId",
+    "serverTime",
+    "v"
+  ]
+}

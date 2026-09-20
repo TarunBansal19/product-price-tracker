@@ -4,15 +4,35 @@
  * authoritative quote capture, DOM cross-checking, and validation gates.
  */
 
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 import { buildProductUrl } from './urls.js';
 import { createAttemptContext, closeAttemptContext, getStoreTimeOffset } from './browserPool.js';
 import { pickPrice } from './extract/index.js';
 import { validationGates } from './validate.js';
 import { ScrapeError, ERROR_CODES } from './errors.js';
+import { computeFingerprint, compareFingerprints } from './structureFingerprint.js';
 import { withTimeout } from '../runner/retry.js';
 import { config } from '../config.js';
 
 const SCRAPER_VERSION = '1.0.0';
+
+let cachedBaseline = null;
+function getBaseline() {
+  if (cachedBaseline) return cachedBaseline;
+  try {
+    const __dirname = path.dirname(fileURLToPath(import.meta.url));
+    const p = path.resolve(__dirname, '../../test/fixtures/structure-baseline.json');
+    if (fs.existsSync(p)) {
+      cachedBaseline = JSON.parse(fs.readFileSync(p, 'utf-8'));
+    }
+  } catch {
+    // Non-blocking advisory check
+  }
+  return cachedBaseline;
+}
 
 /**
  * Dismisses the chaotic cookie overlay by clicking Accept until removed.
@@ -52,6 +72,10 @@ export async function scrapeProductPrice({
   let stage = 'init';
   let httpStatus = 200;
   let domCandidates = [];
+  let rawProductJson = null;
+  let rawPriceResponse = null;
+  let rawLayoutJson = null;
+  let structureDrift = null;
 
   const notify = (msg) => {
     if (onProgress) onProgress(`[t+${((Date.now() - startTime) / 1000).toFixed(1)}s] product ${productId}: ${msg}`);
@@ -63,6 +87,19 @@ export async function scrapeProductPrice({
         stage = 'launch_context';
         context = await createAttemptContext(browser, { timeoutMs, injectFault });
         const page = await context.newPage();
+
+        page.on('response', async res => {
+          const resUrl = res.url();
+          try {
+            if (resUrl.includes(`/api/product/${productId}`)) {
+              rawProductJson = await res.json();
+            } else if (resUrl.includes(`/api/products/${productId}/price`)) {
+              rawPriceResponse = await res.json();
+            } else if (resUrl.includes('/api/layout')) {
+              rawLayoutJson = await res.json();
+            }
+          } catch {}
+        });
 
         stage = 'navigate';
         notify(`navigating to ${url}...`);
@@ -216,6 +253,29 @@ export async function scrapeProductPrice({
 
         domCandidates = domData.candidates;
 
+        // Structure Drift Check (non-blocking early warning)
+        const baseline = getBaseline();
+        if (baseline) {
+          try {
+            const currentFp = computeFingerprint({
+              rawLayoutJson,
+              authoritativeQuote,
+              dom: domData,
+              rawPriceResponse,
+              rawProductJson
+            });
+            const comp = compareFingerprints(currentFp, baseline);
+            if (!comp.match) {
+              structureDrift = comp.diffs;
+              if (comp.hasHighSeverity) {
+                notify(`[WARN: STRUCTURE DRIFT] ${comp.diffs.map(d => d.message).join('; ')}`);
+              }
+            }
+          } catch (fpErr) {
+            // Non-blocking advisory check
+          }
+        }
+
         // V2 Readiness Gate: Ensure no placeholders remaining
         validationGates.checkV2ContentReady({
           rawText: authoritativeQuote ? String(authoritativeQuote.p) : '',
@@ -265,7 +325,8 @@ export async function scrapeProductPrice({
           rawPriceText: result.rawPriceText,
           rawStockText: result.rawStockText,
           priceSource: result.priceSource,
-          crossChecked: result.crossChecked
+          crossChecked: result.crossChecked,
+          structureDrift
         };
       },
       timeoutMs,
@@ -281,6 +342,7 @@ export async function scrapeProductPrice({
       durationMs: Date.now() - startTime,
       candidates: domCandidates.slice(0, 8),
       scraperVersion: SCRAPER_VERSION,
+      structureDrift,
       error: err.message?.slice(0, 300)
     };
 

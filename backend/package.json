@@ -16,7 +16,8 @@
     "scrape:headed": "node src/cli/scrape.js --headed",
     "probe": "node src/cli/probe.js",
     "sync:catalog": "node src/cli/sync-catalog.js",
-    "verify:db": "node src/cli/verify-invariants.js"
+    "verify:db": "node src/cli/verify-invariants.js",
+    "baseline:update": "node src/cli/update-baseline.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.1",
