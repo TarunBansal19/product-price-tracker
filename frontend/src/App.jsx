@@ -33,6 +33,10 @@ export function App() {
 
   useEffect(() => {
     fetchTrackedProducts();
+    const interval = setInterval(() => {
+      fetchTrackedProducts();
+    }, 15000);
+    return () => clearInterval(interval);
   }, [fetchTrackedProducts]);
 
   const handleProductTracked = async (newProduct) => {

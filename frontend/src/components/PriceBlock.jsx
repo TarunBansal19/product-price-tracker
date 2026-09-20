@@ -1,7 +1,7 @@
 import React from 'react';
 import { formatPrice, formatStock, formatDistanceToNow } from '../utils/formatters.js';
 
-export function PriceBlock({ product, observations = [], selectedRange = '7d' }) {
+export function PriceBlock({ product, observations = [], selectedRange = '7d', isScraping = false }) {
   const obs = product?.latestObservation;
   const lastAttempt = product?.lastAttempt;
   const hasObservation = Boolean(obs && obs.price_minor);
@@ -10,10 +10,21 @@ export function PriceBlock({ product, observations = [], selectedRange = '7d' })
   if (!hasObservation) {
     return (
       <div className="price-block">
-        <div className="big-price">No price yet</div>
+        <div className="big-price" style={{ opacity: isScraping ? 0.85 : 1 }}>
+          {isScraping ? 'Checking price...' : 'No price yet'}
+        </div>
         <div className="price-summary-sentence">
-          <span className="price-change-text slate">
-            The first check is running now.
+          <span className="price-change-text slate" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+            {isScraping ? (
+              <>
+                <span className="sync-pulse-dot" />
+                <span>The first scrape is in progress. The price will appear here automatically...</span>
+              </>
+            ) : isLastCheckFailed ? (
+              'The initial check could not read price. Click "Scrape now" above to try again.'
+            ) : (
+              'The first check is running now.'
+            )}
           </span>
         </div>
       </div>
@@ -76,7 +87,13 @@ export function PriceBlock({ product, observations = [], selectedRange = '7d' })
         <span className={`price-change-text ${changeVariant}`}>{changeText}</span>{' '}
         <span>{stockText}</span>{' '}
         <span>{lastCheckedText}</span>{' '}
-        {isLastCheckFailed && (
+        {isScraping && (
+          <span className="sync-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'var(--live)', fontWeight: 500, marginLeft: '6px' }}>
+            <span className="sync-pulse-dot" style={{ width: 6, height: 6 }} />
+            <span>Updating price...</span>
+          </span>
+        )}
+        {isLastCheckFailed && !isScraping && (
           <span className="price-failure-warning">
             The latest check failed; showing the last good price.
           </span>

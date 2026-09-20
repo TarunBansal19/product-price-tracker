@@ -86,9 +86,12 @@ trackedRouter.post('/', mutationRateLimiter, validateBody(trackProductSchema), a
 
     // Fire off async initial scrape on the background event loop
     setImmediate(async () => {
+      let runId = null;
+      let claimed = false;
       try {
+        claimed = await repo.claimProduct(tracked.id, 120);
         console.log(`[tracked] Triggering initial background scrape for product ${storeProductId}...`);
-        const runId = await repo.claimManualRun('initial', 300);
+        runId = await repo.claimManualRun('initial', 300);
         const browser = await getBrowser({ headed: false });
         await executeProductJob({
           product: tracked,
@@ -115,6 +118,10 @@ trackedRouter.post('/', mutationRateLimiter, validateBody(trackProductSchema), a
             productsFailed: 1,
             note: `Initial scrape failed: ${err.message}`
           }).catch(() => {});
+        }
+      } finally {
+        if (claimed) {
+          await repo.releaseProduct(tracked.id).catch(() => {});
         }
       }
     });

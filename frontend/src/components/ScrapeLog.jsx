@@ -23,7 +23,7 @@ const ERROR_DESCRIPTIONS = {
   SKIPPED_RUN_DEADLINE: 'Skipped to respect overall run deadline.'
 };
 
-export function ScrapeLog({ productId }) {
+export function ScrapeLog({ productId, refreshKey }) {
   const [attempts, setAttempts] = useState([]);
   const [filter, setFilter] = useState('all'); // 'all' | 'retried' | 'failed'
   const [loading, setLoading] = useState(false);
@@ -66,7 +66,7 @@ export function ScrapeLog({ productId }) {
 
   useEffect(() => {
     fetchAttempts(null, false);
-  }, [fetchAttempts]);
+  }, [fetchAttempts, refreshKey]);
 
   const handleShowOlder = () => {
     if (attempts.length === 0 || loadingMore) return;

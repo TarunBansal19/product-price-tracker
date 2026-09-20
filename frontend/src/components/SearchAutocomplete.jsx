@@ -110,7 +110,7 @@ export function SearchAutocomplete({ trackedProductIds = new Set(), onProductTra
       setResults([]);
       if (onProductTracked) {
         // Pass newly tracked product info so it can be selected immediately
-        onProductTracked(res.product || { store_product_id: String(item.id), name: item.name });
+        onProductTracked(res.trackedProduct || res.product || { store_product_id: String(item.id), name: item.name });
       }
     } catch (err) {
       alert(`Failed to track product: [${err.code || 'ERROR'}] ${err.message}`);

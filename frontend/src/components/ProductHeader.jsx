@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { api } from '../api.js';
 
-export function ProductHeader({ product, onProductUpdated, onUntrack }) {
-  const [scraping, setScraping] = useState(false);
+export function ProductHeader({ product, isScraping = false, onScrapeNow, onUntrack }) {
   const [cooldown, setCooldown] = useState(0);
 
   // Cooldown timer
@@ -14,25 +13,16 @@ export function ProductHeader({ product, onProductUpdated, onUntrack }) {
     return () => clearInterval(timer);
   }, [cooldown]);
 
-  const handleScrapeNow = async () => {
-    if (!product?.id || scraping || cooldown > 0) return;
-    setScraping(true);
+  const handleScrapeClick = async () => {
+    if (!product?.id || isScraping || cooldown > 0) return;
     try {
-      await api.triggerManualScrape(product.id);
-      // Start 60s cooldown per server rate limit rule
+      await onScrapeNow();
       setCooldown(60);
-      if (onProductUpdated) {
-        // Trigger refetch after a short wait so backend job runner has kicked off
-        setTimeout(onProductUpdated, 3000);
-        setTimeout(onProductUpdated, 8000);
-      }
     } catch (err) {
       if (err.status === 409 || (err.code && err.code.includes('COOLDOWN'))) {
         setCooldown(60);
       }
       alert(`Scrape request: [${err.code || 'ERROR'}] ${err.message}`);
-    } finally {
-      setScraping(false);
     }
   };
 
@@ -53,6 +43,8 @@ export function ProductHeader({ product, onProductUpdated, onUntrack }) {
     }
   };
 
+  const isDisabled = isScraping || cooldown > 0;
+
   return (
     <div className="product-header">
       <div className="product-title-row">
@@ -61,14 +53,19 @@ export function ProductHeader({ product, onProductUpdated, onUntrack }) {
           <button
             type="button"
             className="btn-outline"
-            disabled={scraping || cooldown > 0}
-            onClick={handleScrapeNow}
+            disabled={isDisabled}
+            onClick={handleScrapeClick}
           >
-            {scraping
-              ? 'Scraping...'
-              : cooldown > 0
-              ? `Scrape in ${cooldown}s`
-              : 'Scrape now'}
+            {isScraping ? (
+              <>
+                <span className="scraping-spinner" aria-hidden="true" />
+                <span>Scraping...</span>
+              </>
+            ) : cooldown > 0 ? (
+              `Scrape in ${cooldown}s`
+            ) : (
+              'Scrape now'
+            )}
           </button>
           <button
             type="button"
