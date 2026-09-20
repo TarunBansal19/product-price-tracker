@@ -3,11 +3,16 @@
  * Handles cold-start wakeup retries for GET requests, consistent error unpacking.
  */
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || (
+const rawBase = import.meta.env.VITE_API_BASE_URL || (
   typeof window !== 'undefined' && window.location.hostname === 'localhost'
     ? 'http://localhost:3001/api'
     : '/api'
 );
+
+const normalizedBase = rawBase.replace(/\/+$/, '');
+const API_BASE = normalizedBase.endsWith('/api')
+  ? normalizedBase
+  : `${normalizedBase}/api`;
 
 let wakeupListeners = new Set();
 

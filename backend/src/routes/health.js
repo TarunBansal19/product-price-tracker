@@ -8,7 +8,11 @@ import { isDbConfigured } from '../db/client.js';
 
 export const healthRouter = express.Router();
 
-healthRouter.get('/', async (req, res) => {
+healthRouter.get('/live', (req, res) => {
+  res.status(200).json({ status: 'ok', uptime: Math.round(process.uptime()) });
+});
+
+const handleHealth = async (req, res) => {
   const startTime = Date.now();
   let dbStats = {
     connected: false,
@@ -48,4 +52,8 @@ healthRouter.get('/', async (req, res) => {
       stale: dbStats.stale
     }
   });
-});
+};
+
+healthRouter.get('/', handleHealth);
+healthRouter.get('/ready', handleHealth);
+

@@ -28,11 +28,13 @@ app.use(
       if (!origin) return callback(null, true);
       if (
         config.frontendOriginsList.includes('*') ||
+        origin.endsWith('.vercel.app') ||
+        origin.includes('localhost') ||
         config.frontendOriginsList.some(o => origin === o || origin.endsWith(o))
       ) {
         return callback(null, true);
       }
-      return callback(new Error(`CORS blocked origin "${origin}"`), false);
+      return callback(null, false);
     },
     credentials: true
   })
