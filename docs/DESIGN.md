@@ -158,6 +158,18 @@ In accordance with Operating Rule R8, all mistakes made by AI during development
    - *Failing Output*: `Saved fixture to fixture-200-*.json (price: undefined, stock: undefined)`.
    - *Cause*: The script listened for `/price` response without scrolling the container into viewport or ensuring mouse hover telemetry met the minimum 8-movement threshold.
    - *Fix*: Added explicit `scrollIntoViewIfNeeded()`, programmatic mouse move jitter satisfying the 8-movement and 600 ms dwell requirement, and a `page.waitForFunction` check for hydrated DOM text.
+3. **Store Anti-Bot Attestation Rejection (401) from Clock Skew**:
+   - *Failing Output*: `POST /api/session -> 401 Unauthorized; GATE_NOT_PASSED: Store showed error: "challenge_failed"`.
+   - *Cause*: Developer machine local system clock was 5.5 hours ahead of the store server's real UTC time. In the browser, `Date.now()` populated `att.env.at` with a future timestamp, which the store server rejected.
+   - *Fix*: Implemented `getStoreTimeOffset()` to calculate local vs store server time offset and injected the synchronized delta into the browser context's `Date.now()` and Gate V9 `checkV9Freshness`.
+4. **Split-Span Price Digits Parsed as Independent Prices (PRICE_AMBIGUOUS)**:
+   - *Failing Output*: `PRICE_AMBIGUOUS: Authoritative quote (973600) and divergent DOM prices (900, 700, 300, 600)`.
+   - *Cause*: The store split formatted price strings into single-character `<span>` elements with zero-width spaces. Filtering for leaf nodes (`children.length === 0`) extracted only single digits and omitted the parent price container.
+   - *Fix*: Included price containers with inline span children (`isPriceContainer`), ignored isolated short digits without currency symbols, and added fallback cross-checking against lines in `blockText`.
+5. **camelCase Payload Causing Database Constraint Failure on observed_at**:
+   - *Failing Output*: `null value in column "observed_at" violates not-null constraint (23502)`.
+   - *Cause*: Extractor emitted camelCase keys (`observedAt`), while the initial Postgres RPC only checked `p_observation->>'observed_at'`.
+   - *Fix*: Mapped fields to snake_case in `repo.js` and added `coalesce` for both camelCase and snake_case in migration `0005_fix_finish_attempt_success.sql`.
 
 ---
 
