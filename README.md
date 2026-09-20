@@ -1,58 +1,141 @@
-# INE Product Price Tracker
+# INE Product Price Tracker (Web Scraping Assignment)
 
-An automated web scraper and price-tracking application engineered to monitor product pricing and stock availability on `https://demo.inelabteamdev.com`. Designed for long-term unattended reliability on free-tier infrastructure.
-
----
-
-## 1. Overview & Key Capabilities
-
-- **Automated 2-Hourly Scrapes**: Triggered by external cron (`cron-job.org`) with idempotent slot claims and automatic recovery.
-- **Resilient Gated Extraction**: Handles complex client-side defenses: telemetry tracking (dwell + hover movements), chaotic cookie overlays, rotating CSS classes, decoy prices, and upstream 500 errors.
-- **Strict Data Integrity**: Zero fabricated data. Enforces 9 validation gates (V1–V9) and 7 database invariants (I1–I7). Observations are strictly append-only; failed attempts generate detailed error logs and never write placeholder observations.
-- **Observable Runs**: Built-in CLI supporting headed mode, step-by-step narrative logging, and labelled fault simulation (`--inject slow|hang|http500|abort`).
-- **Clean Architecture**: Node.js ESM backend with Playwright Chromium, Supabase Postgres database with atomic SQL RPC functions, and a minimal, honest React + Vite frontend.
+A resilient, production-grade full-stack web application built for the **INE Software Engineer Intern Assignment**. It monitors and tracks product pricing and stock availability over time from INE's hosted mock store (`https://demo.inelabteamdev.com`), engineered specifically for long-term unattended reliability on free-tier infrastructure.
 
 ---
 
-## 2. Live Links
+## 1. Live Deployment & Links
 
-- **Live Application (Frontend)**: `https://product-price-tracker-frontend-alpha.vercel.app/` 
-- **Backend API**: `https://product-price-tracker-backend-ahkz.onrender.com`
-- **Health Check**: `https://product-price-tracker-backend-ahkz.onrender.com/api/health`
+- **Live Application (Frontend)**: [https://product-price-tracker-frontend-alpha.vercel.app](https://product-price-tracker-frontend-alpha.vercel.app) *(Vercel)*
+- **Backend API**: [https://product-price-tracker-backend-ahkz.onrender.com](https://product-price-tracker-backend-ahkz.onrender.com) *(Render Docker)*
+- **API Health Check**: [https://product-price-tracker-backend-ahkz.onrender.com/api/health/live](https://product-price-tracker-backend-ahkz.onrender.com/api/health/live)
+- **Target Mock Store**: [https://demo.inelabteamdev.com](https://demo.inelabteamdev.com)
+- **Video Walkthrough (Headed Run Demo)**: *(Include your recording link here, e.g. Loom / Google Drive / YouTube)*
 
 ---
 
-## 3. Architecture
+## 2. Tech Stack & Architecture
+
+- **Frontend**: React.js (Vite, Tailwind CSS, lightweight Lucide icons) deployed on **Vercel**.
+- **Backend**: Node.js (Express, ESM, Zod, Pino logging) deployed as a containerized service on **Render**.
+- **Database**: **Supabase (PostgreSQL)** with atomic SQL RPCs, Row-Level Security (RLS), and database invariants.
+- **Scraping Engine**: **Playwright (Chromium)** with interaction telemetry emulation, dynamic store-clock drift synchronization, and memory-bounded browser recycling.
+- **Scheduling**: External cron via **cron-job.org** with keep-warm pings and slot-based idempotent execution.
+- **CI/CD**: **GitHub Actions** running 53 automated unit and fault tests on every push.
 
 ```
-cron-job.org ──(POST /api/cron/tick, every 2h, Bearer secret)──┐
-cron-job.org ──(GET /api/health, every 10 min: keep warm)──────┤
-                                                               ▼
- React (Vercel) ── REST ──►  Express API (Render)  ──► Supabase Postgres
-                               │      ▲                 (tables + RPCs)
-                               │      │
-                               ▼      │
-                      Run orchestrator (async, after 202)
-                        └─ per product: jobRunner (retry loop + backoff)
-                             └─ priceScraper (Chromium with telemetry emulation)
-                                  └─ validation gates (V1–V9) → observation
-                               store client ──► demo.inelabteamdev.com ONLY
+                   cron-job.org
+        ┌───────────────┴───────────────┐
+        │ POST /api/cron/tick (every 2h)│ GET /api/health/live (every 10 min)
+        ▼                               ▼
+  ┌───────────────────────────────────────────┐
+  │         Node.js Express (Render)          │ ◄──── REST API ──── React Frontend
+  │  - Slot-based idempotent scheduler        │                       (Vercel)
+  │  - Job runner with exponential backoff    │
+  │  - Circuit breaker (infra tripwire)       │
+  │  - Structure drift fingerprinting         │
+  └─────────────────────┬─────────────────────┘
+                        │
+        ┌───────────────┴───────────────┐
+        ▼                               ▼
+ ┌──────────────┐             ┌──────────────────┐
+ │   Supabase   │             │    Playwright    │
+ │  PostgreSQL  │             │   Chromium Pool  │
+ │  (Atomic     │             └────────┬─────────┘
+ │   RPCs)      │                      ▼
+ └──────────────┘             https://demo.inelabteamdev.com
 ```
 
 ---
 
-## 4. Local Setup & Quick Start
+## 3. Core Features (Per Assignment Requirements)
 
-### Prerequisites:
+### 1. Product Selection & Catalog Search
+- Real-time search across INE's hosted store catalog by partial or full product name.
+- Track products with a single click, persisting tracked items in Supabase.
+- Enforces strict limits (`MAX_TRACKED = 15`) to prevent runaway resource consumption.
+
+### 2. Scheduled Scraping (The Core Challenge)
+- Automatically scrapes tracked products once every **2 hours**.
+- **Idempotent Slot Claiming**: Scrape slots are deterministically rounded to 2-hour boundaries. Duplicate cron ticks or retries never produce duplicate runs.
+- **Free-Tier Sleep Handling**: Triggered by external webhook (`POST /api/cron/tick`). Includes a 10-minute keep-warm ping to eliminate cold starts.
+- **Bounded Concurrency (`CONCURRENCY = 1`)**: Sequential product processing ensures memory stays strictly under 384 MB (safely within Render’s 512 MB free tier).
+
+### 3. Price History & Honest Scrape Log
+- Interactive history view displaying price trends and stock availability states over time.
+- **Honest Attempt Logging**: Every attempt records its exact outcome (`success`, `retried`, or `failed`), duration, HTTP status, and error classification.
+- **Zero Fabricated Data**: Failed attempts **never** write dummy prices or empty observations.
+
+### 4. Observable (Headed) Mode & Fault Simulation
+- Built-in CLI supporting `--headed` and `--slowmo` to watch browser interaction live.
+- Boundary fault injection flags (`--inject slow|http500|hang|abort`) demonstrating real-time retry recovery and backoff.
+
+### 5. Bonus Features Implemented
+- 🛡️ **Store Page Structure Change Detection**: Computes SHA-256 structural fingerprints of page layouts, DOM hierarchies, and quote schemas to alert on store revisions before scrapers fail.
+- 🤖 **CI/CD Pipeline with GitHub Actions**: Automatically validates 53 tests on every push and pull request against saved real fixtures.
+- ⚡ **Circuit Breaker**: Detects prolonged store-wide outages and fast-fails remaining jobs to conserve resources.
+- 🔔 **Catalog Enrichment**: Displays product specifications, ratings, categories, and stock indicators on the dashboard.
+
+---
+
+## 4. Scraping Schedule & Cron Configuration
+
+Because free-tier instances sleep when idle, scheduling is handled externally via **cron-job.org**:
+
+| Job Name | Target URL | Schedule (UTC) | Method & Auth | Purpose |
+|---|---|---|---|---|
+| **`scrape-tick`** | `https://<render-url>/api/cron/tick` | `0 */2 * * *` (Every 2h) | `POST`<br>`Authorization: Bearer <CRON_SECRET>` | Triggers 2-hourly scrape cycle. Slot is rounded and idempotent. Returns `202 Accepted` immediately. |
+| **`keep-warm`** | `https://<render-url>/api/health/live` | `*/10 * * * *` (Every 10m) | `GET` | Prevents Render container from sleeping, eliminating tick cold starts. |
+
+---
+
+## 5. Environment Variables
+
+### Backend (`backend/.env`)
+
+| Variable | Example / Default | Required | Description |
+|---|---|:---:|---|
+| `NODE_ENV` | `production` / `development` | Yes | Node runtime environment |
+| `PORT` | `3001` (or `10000` on Render) | Yes | HTTP server port |
+| `SUPABASE_URL` | `https://xxxx.supabase.co` | Yes | Supabase PostgreSQL project URL |
+| `SUPABASE_SERVICE_ROLE_KEY` | `eyJhbGciOi...` | Yes | Service-role key with permissions to execute RPCs |
+| `CRON_SECRET` | `min-32-char-random-string` | Yes | Bearer token protecting `/api/cron/tick` and admin endpoints |
+| `FRONTEND_ORIGINS` | `https://your-app.vercel.app,http://localhost:5173` | Yes | Allowed origins for CORS |
+| `STORE_ORIGIN` | `https://demo.inelabteamdev.com` | Yes | Strict store origin (SSRF protection) |
+| `MAX_TRACKED` | `15` | No | Max active products allowed to be tracked |
+| `SCRAPE_INTERVAL_HOURS` | `2` | No | Interval between scheduled runs |
+| `ATTEMPT_TIMEOUT_MS` | `45000` | No | Timeout per single scrape attempt (ms) |
+| `MAX_ATTEMPTS` | `4` | No | Maximum retry attempts before marking product failed |
+| `BACKOFF_BASE_MS` | `1500` | No | Exponential backoff base delay (ms) |
+| `BACKOFF_MAX_MS` | `15000` | No | Max delay cap between retries (ms) |
+| `JOB_DEADLINE_MS` | `120000` | No | Max runtime per product across all retries (2 min) |
+| `RUN_DEADLINE_MS` | `1500000` | No | Total deadline for an entire run (25 min) |
+| `CONCURRENCY` | `1` | No | Concurrent browser contexts (1 bounds RAM) |
+| `OUTLIER_PCT` | `35` | No | Percentage price jump requiring second-read confirmation |
+| `HEADED` | `false` | No | Run browser visibly (for local debugging) |
+| `SLOW_MO_MS` | `0` | No | Delay between Playwright actions (ms) |
+| `LOG_LEVEL` | `info` | No | Pino logging level (`info`, `debug`, `trace`) |
+
+### Frontend (`frontend/.env`)
+
+| Variable | Example / Default | Required | Description |
+|---|---|:---:|---|
+| `VITE_API_BASE_URL` | `https://<render-url>/api` | Yes | Base URL pointing to the deployed backend API |
+
+---
+
+## 6. Local Setup & Quick Start
+
+### Prerequisites
 - Node.js ≥ 20
-- Supabase account (or local PostgreSQL with `pgcrypto` and `pg_trgm`)
+- npm ≥ 10
 
-### 1. Clone & Install Dependencies
+### 1. Clone & Install
 ```bash
-git clone https://github.com/your-username/Product-Price-Tracker.git
-cd Product-Price-Tracker
+git clone https://github.com/TarunBansal19/product-price-tracker.git
+cd product-price-tracker
 
-# Install backend dependencies & Playwright browsers
+# Install backend dependencies & Playwright browser
 cd backend
 npm install
 npx playwright install chromium
@@ -62,150 +145,83 @@ cd ../frontend
 npm install
 ```
 
-### 2. Configure Environment Variables
-Copy `.env.example` in `backend/`:
+### 2. Environment Configuration
 ```bash
-cd ../backend
+# In backend/
 cp .env.example .env
+# Edit backend/.env with your Supabase credentials and CRON_SECRET
+
+# In frontend/
+cp .env.example .env
+# Set VITE_API_BASE_URL=http://localhost:3001/api
 ```
-Fill in your Supabase credentials and a secure `CRON_SECRET`.
 
-### 3. Apply Database Migrations
-Run the SQL migration scripts located in `supabase/migrations/` in your Supabase SQL Editor:
-1. `supabase/migrations/0001_init.sql` (creates schema, tables, indexes, and RLS)
-2. `supabase/migrations/0002_rpc.sql` (creates atomic RPC functions for slot claiming, leases, and attempt tracking)
+### 3. Database Setup (Supabase)
+Execute migrations in the Supabase SQL Editor in order:
+1. `supabase/migrations/0001_init.sql`
+2. `supabase/migrations/0002_rpc.sql`
+3. `supabase/migrations/0003_sweep_stale_fix.sql`
+4. `supabase/migrations/0004_fix_sweep_ambiguous.sql`
 
-### 4. Sync Initial Catalog Snapshot
+Sync the initial store catalog:
 ```bash
 cd backend
 npm run sync:catalog
 ```
 
-### 5. Run Development Servers
+### 4. Run Development Servers
 ```bash
-# Start backend on port 3001
+# Terminal 1: Backend
 cd backend
 npm run dev
 
-# In a separate terminal, start frontend on port 5173
+# Terminal 2: Frontend
 cd frontend
 npm run dev
 ```
-Open `http://localhost:5173` in your browser.
+Open `http://localhost:5173` to test the application.
 
 ---
 
-## 5. Environment Variables (`backend/.env`)
+## 7. Observable Headed Run & Verification
 
-| Variable | Example / Default | Description |
-|---|---|---|
-| `NODE_ENV` | `development` / `production` | Node environment |
-| `PORT` | `3001` | Server port (Render sets this automatically) |
-| `SUPABASE_URL` | `https://xxxx.supabase.co` | Supabase project URL |
-| `SUPABASE_SERVICE_ROLE_KEY` | *(secret)* | Supabase service-role key (backend only) |
-| `CRON_SECRET` | *(min 32 chars)* | Secret token for `/api/cron/tick` and `/api/admin/*` |
-| `FRONTEND_ORIGINS` | `http://localhost:5173,https://your-app.vercel.app` | CORS allow-list (comma-separated) |
-| `STORE_ORIGIN` | `https://demo.inelabteamdev.com` | Strict store origin (Rule R4) |
-| `MAX_TRACKED` | `15` | Maximum active tracked products |
-| `SCRAPE_INTERVAL_HOURS` | `2` | Interval slot size (2 hours) |
-| `ATTEMPT_TIMEOUT_MS` | `30000` | Hard timeout per attempt |
-| `MAX_ATTEMPTS` | `4` | Maximum retry attempts per job |
-| `BACKOFF_BASE_MS` | `1500` | Exponential backoff base (ms) |
-| `BACKOFF_MAX_MS` | `15000` | Exponential backoff cap (ms) |
-| `JOB_DEADLINE_MS` | `120000` | Per-product job deadline (2 minutes) |
-| `RUN_DEADLINE_MS` | `1500000` | Total run deadline (25 minutes) |
-| `CONCURRENCY` | `1` | Concurrency limit (bounds memory to < 384 MB) |
-| `STABILITY_MS` | `2000` | Stability observation window (ms) |
-| `OUTLIER_PCT` | `35` | Outlier deviation threshold (%) |
-| `LOG_LEVEL` | `info` | Pino log level |
-
-Frontend configuration:
-| Variable | Example | Description |
-|---|---|---|
-| `VITE_API_BASE_URL` | `https://your-backend.onrender.com/api` | Base URL for backend API calls |
-
----
-
-## 6. Scraping Schedule & Cron Setup
-
-To maintain unattended runs on free-tier hosting, set up two jobs in [cron-job.org](https://cron-job.org):
-
-| Job Name | URL | Schedule (UTC) | Method & Headers | Purpose |
-|---|---|---|---|---|
-| **`scrape-tick`** | `https://<render-url>/api/cron/tick` | `0 */2 * * *` (Every 2 hours) | `POST`<br>`Authorization: Bearer <CRON_SECRET>` | Triggers unattended scrape run. Slot is rounded and idempotent. |
-| **`keep-warm`** | `https://<render-url>/api/health` | `*/10 * * * *` (Every 10 min) | `GET` | Prevents container from sleeping and avoids tick cold starts. |
-
-*Note: In cron-job.org, enable "Save responses in history" for `scrape-tick` to maintain independent audit logs.*
-
----
-
-## 7. Observable CLI & Headed Run Instructions
-
-The CLI runner provides an observable, narrative stream demonstrating the full extraction cycle:
+Run the scraper visibly with full narrative output:
 
 ```bash
 cd backend
 
-# Run headless against product 200
-npm run scrape -- --ids 200
+# Standard observable headed scrape (product 200 with 300ms slow-motion)
+node src/cli/scrape.js --ids 200 --headed --slowmo 300
 
-# Run in HEADED mode with slow-motion (250ms) to observe browser interaction
-npm run scrape -- --ids 200,114 --headed --slowmo 250
+# Demonstrate handling of SLOW responses (simulates 5s network delay)
+node src/cli/scrape.js --ids 200 --headed --slowmo 300 --inject slow
 
-# Simulate upstream network faults (isolated to CLI only, never combined with --persist)
-npm run scrape -- --ids 200 --inject slow
-npm run scrape -- --ids 200 --inject http500
-npm run scrape -- --ids 200 --inject hang
+# Demonstrate handling of FAILING responses (simulates HTTP 500 on attempt 1, backs off, retries & recovers on attempt 2)
+node src/cli/scrape.js --ids 200 --headed --slowmo 300 --inject http500
 
-# Persist CLI scrape results to the database
-npm run scrape -- --ids 200 --persist
-```
-
----
-
-## 8. Testing & Verification Commands
-
-```bash
-cd backend
-
-# Run all unit and fault tests
+# Run full test suite (53 tests: unit, fault, change detection, invariants)
 npm test
 
-# Run pure unit tests (normalizer, parsers, validation gates V1–V9)
-npm run test:unit
-
-# Run fault tests (backoff, withTimeout, never-settling promise, circuit breaker)
-npm run test:fault
-
-# Run reliability soak against the live store
-npm run probe -- --ids 200,114,10,86,206 --rounds 2
-
-# Verify all database invariants (I1–I7) on live database
-npm run verify:db
+# Run change detection baseline update
+npm run baseline:update
 ```
 
 ---
 
-## 9. Deployment Instructions
+## 8. Short Design Note
 
-### Backend (Render Docker Web Service)
-1. In Render, create a new **Web Service** pointing to your repository.
-2. Select **Docker** environment (Render uses `backend/Dockerfile` using `mcr.microsoft.com/playwright:v1.50.1-noble`).
-3. Set **Root Directory** to `backend`.
-4. Set **Health Check Path** to `/api/health`.
-5. Add all required environment variables (§5).
+*(For full technical post-mortem and root cause analysis, see [challenges.md](file:///home/epsilon/Codedump/INE/Product-Price-Tracker/challenges.md))*
 
-### Frontend (Vercel)
-1. In Vercel, import your GitHub repository.
-2. Set **Root Directory** to `frontend`.
-3. Set **Framework Preset** to `Vite`.
-4. Add environment variable `VITE_API_BASE_URL=https://<your-render-url>/api`.
-5. Deploy.
+### How Scraping Reliability Was Achieved
+1. **Dynamic Server Clock Synchronization**: The mock store requires cryptographic proof-of-work and time-sensitive session attestations. To prevent local or server clock drift from causing HTTP 401s, `browserPool.js` dynamically syncs with the store server’s timestamp (`/api/challenge`) and injects an aligned `Date.now()` into the browser context.
+2. **Realistic Interaction Telemetry**: The store disables the "Reveal price" button until mouse dwell and movement thresholds are satisfied. The scraper computes element bounding boxes and dispatches realistic mouse curves before triggering the click.
+3. **Multi-Source Cross-Checking & 9 Validation Gates (V1–V9)**: Prices are decrypted from WebSocket/XHR payloads (`window.__quotes`) and cross-checked against visible DOM candidates. Scrapes pass through 9 strict validation gates (readiness, sanity bounds, currency matching, outlier detection) before reaching the database.
+4. **Resilient Retry Loop with Jittered Backoff**: Network or transient errors trigger bounded exponential backoff (`t = min(max_ms, base * 2^attempt + jitter)`). Failed attempts are recorded honestly in the database audit log.
 
----
+### Key Trade-Offs Made
+- **Sequential Execution vs. Concurrency**: We chose `CONCURRENCY = 1` rather than parallel browser contexts. While this takes ~2 minutes for 15 products, it strictly caps memory at ~350 MB, preventing Render's 512 MB free-tier container from being killed by the OOM killer.
+- **Headless Browser vs. Raw HTTP**: While catalog searches use fast, lightweight HTTP fetches, price extraction requires Playwright Chromium because the store relies on dynamic WebAssembly, canvas fingerprinting, and client-side decryption.
 
-## 10. Known Limitations
-
-- **Free-Tier Cold Starts**: When the backend sleeps (if the keep-warm monitor experiences gaps), initial requests may take up to 60 seconds. The frontend features an automatic wakeup retry banner.
-- **Sequential Concurrency**: To remain safely within Render's 512 MB memory limit, scraping runs with `CONCURRENCY = 1`. A full 15-product cycle requires ~2–3 minutes.
-- **Catalog Snapshot**: Search queries the stored database snapshot; sync new store additions periodically using `npm run sync:catalog`.
+### What AI Tools Got Wrong on First Attempt & How We Corrected It
+- **Split-Span Price Digits**: Initial AI-generated selector logic looked for leaf text nodes (`children.length === 0`). However, the mock store intentionally splits prices across multiple `<span>` elements with zero-width spaces (e.g., `<span>9</span><span>,</span><span>7</span>`). The AI code extracted each digit as an independent price, triggering false divergence errors. We fixed this by introducing container-level price recognition and Unicode NFKC normalization.
+- **Dangling Retries Invariant**: The initial retry runner marked intermediate attempts as `retried`. If the process was terminated mid-run, the final attempt remained dangling as `retried`, violating database invariant I6. We resolved this by implementing an atomic database sweeper function (`sweep_stale()`) that reconciles interrupted runs upon server restart.
