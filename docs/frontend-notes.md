@@ -15,3 +15,13 @@ This document logs design and implementation choices, adaptations, or edge-case 
 - **Already Tracked Status**: Matches either `item.alreadyTracked` from the catalog search response or client-side membership in the currently tracked products set, displaying `✓ Tracking` in green and disabling duplicate track calls.
 - **Empty State Waiting Motif**: Implemented the 26 dashed hollow bars (4x14 px, radius 1, dashed `--day-ticks` border, 7px gap) directly matching Frame 2.
 
+## Step 3: Tracked List & Sparklines
+- **Tracked Product Row**: Implemented 2-line layout per Section 3.1:
+  - Line 1: Product name (Plex 500, 14px) and latest price formatted without decimals (e.g. `₹12,723`) in Plex 600 tabular numbers. If the last scrape failed, shows the last known good price in `--slate`.
+  - Line 2: 8px status dot + 12px `--slate` text (covering `in_stock`, `low_stock` with count, `out_of_stock`, `failed`, `pending`) and 64x18 sparkline.
+- **Sparkline Behavior**:
+  - Filtered to the last 7 days of real observation history.
+  - Automatically hidden if fewer than 2 valid observations exist.
+  - Rendered as SVG with `stroke-width: 1.5`, round joins and caps, stroke `--ink` when row is selected and `--muted` when unselected.
+
+

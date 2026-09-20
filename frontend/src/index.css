@@ -311,6 +311,123 @@ button:disabled {
   flex: 1 1 auto;
 }
 
+/* Tracked Product Row */
+.tracked-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: transparent;
+  transition: background-color 0.1s ease;
+  user-select: none;
+  outline: none;
+}
+
+.tracked-row:hover {
+  background-color: rgba(19, 35, 43, 0.04);
+}
+
+.tracked-row.selected {
+  background-color: var(--sheet);
+}
+
+.tracked-row:focus-visible {
+  outline: 2px solid var(--live);
+  outline-offset: 2px;
+}
+
+.tracked-row-line1 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.tracked-row-name {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 175px;
+}
+
+.tracked-row-price {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+.tracked-row-price.stale-failed {
+  color: var(--slate);
+}
+
+.tracked-row-line2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  height: 18px;
+}
+
+.tracked-row-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--slate);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.tracked-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.tracked-status-dot.in_stock {
+  background-color: var(--live);
+}
+
+.tracked-status-dot.low_stock {
+  background-color: var(--amber);
+}
+
+.tracked-status-dot.out_of_stock {
+  background-color: var(--muted);
+}
+
+.tracked-status-dot.failed {
+  background-color: var(--red);
+}
+
+.tracked-status-dot.pending {
+  background-color: var(--muted);
+}
+
+.tracked-row-sparkline {
+  width: 64px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+.sparkline-svg {
+  display: block;
+}
+
 /* Spacer */
 .rail-spacer {
   flex: 1 0 auto;

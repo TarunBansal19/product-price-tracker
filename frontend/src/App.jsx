@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { BackendStatus } from './components/BackendStatus.jsx';
 import { SearchAutocomplete } from './components/SearchAutocomplete.jsx';
+import { TrackedRow } from './components/TrackedRow.jsx';
 import { EmptyState } from './components/EmptyState.jsx';
 import { api, subscribeWakeup } from './api.js';
 
@@ -91,9 +92,16 @@ export function App() {
           </span>
         </div>
 
-        {/* Tracked List (will be populated in Step 3) */}
-        <div className="rail-tracked-list">
-          {/* Populated in Step 3 */}
+        {/* Tracked List (Section 3.1) */}
+        <div className="rail-tracked-list" role="list">
+          {trackedProducts.map((product) => (
+            <TrackedRow
+              key={product.id}
+              product={product}
+              isSelected={selectedProductId === product.id}
+              onSelect={(p) => setSelectedProductId(p.id)}
+            />
+          ))}
         </div>
 
         {/* Spacer */}
