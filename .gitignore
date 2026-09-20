@@ -20,3 +20,6 @@ supabase/.temp/
 .DS_Store
 .vscode/
 .idea/
+.agents/
+skills-lock.json
+
