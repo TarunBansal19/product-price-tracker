@@ -36,41 +36,95 @@ export function formatTimestamp(ts) {
 
 /**
  * Format price from integer minor units (paise/cents)
- * @param {number|bigint} priceMinor
+ * @param {number|bigint|string} priceMinor
  * @param {string} currency
+ * @param {boolean} includeDecimals
  * @returns {string}
  */
-export function formatPrice(priceMinor, currency = 'INR') {
-  if (priceMinor === null || priceMinor === undefined || isNaN(Number(priceMinor))) {
-    return '—';
-  }
+export function formatPrice(priceMinor, currency = 'INR', includeDecimals = true) {
+  if (priceMinor === null || priceMinor === undefined || priceMinor === '') return '—';
+  const num = Number(priceMinor);
+  if (isNaN(num)) return '—';
 
-  const major = Number(priceMinor) / 100;
-  if (currency === 'INR') {
-    return `₹${major.toLocaleString('en-IN', {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    })}`;
+  const major = num / 100;
+  try {
+    return new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: currency || 'INR',
+      minimumFractionDigits: includeDecimals ? 2 : 0,
+      maximumFractionDigits: includeDecimals ? 2 : 0
+    }).format(major);
+  } catch {
+    return `₹${major.toFixed(includeDecimals ? 2 : 0)}`;
   }
-
-  return `${currency} ${major.toLocaleString(undefined, {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  })}`;
 }
 
 /**
- * Format stock state to readable label
+ * Format stock state to readable label per spec (Sentence case)
  * @param {string} state
  * @param {number|null} quantity
  * @returns {string}
  */
 export function formatStock(state, quantity = null) {
-  if (!state) return '—';
-  const labels = {
-    in_stock: 'In Stock',
-    low_stock: quantity !== null ? `Low Stock (${quantity} left)` : 'Low Stock',
-    out_of_stock: 'Out of Stock'
-  };
-  return labels[state] || state.replace(/_/g, ' ');
+  if (!state) return 'No stock data';
+  if (state === 'in_stock') {
+    return quantity !== null && quantity !== undefined ? `In stock, ${quantity} left` : 'In stock';
+  }
+  if (state === 'low_stock') {
+    return quantity !== null && quantity !== undefined ? `Low stock, ${quantity} left` : 'Low stock';
+  }
+  if (state === 'out_of_stock') {
+    return 'Out of stock';
+  }
+  return state.replace(/_/g, ' ');
+}
+
+/**
+ * Format relative time distance to now
+ * @param {string|Date} ts
+ * @returns {string}
+ */
+export function formatDistanceToNow(ts) {
+  if (!ts) return 'never';
+  const time = new Date(ts).getTime();
+  if (isNaN(time)) return 'never';
+
+  const diffSec = Math.max(0, Math.floor((Date.now() - time) / 1000));
+  if (diffSec < 45) return 'just now';
+  const diffMin = Math.floor(diffSec / 60);
+  if (diffMin < 60) return `${diffMin} ${diffMin === 1 ? 'minute' : 'minutes'} ago`;
+  const diffHours = Math.floor(diffMin / 60);
+  const remMin = diffMin % 60;
+  if (diffHours < 24) {
+    if (remMin === 0) return `${diffHours} ${diffHours === 1 ? 'hour' : 'hours'} ago`;
+    return `${diffHours} h ${remMin} min ago`;
+  }
+  const diffDays = Math.floor(diffHours / 24);
+  return `${diffDays} ${diffDays === 1 ? 'day' : 'days'} ago`;
+}
+
+/**
+ * Calculate text for next run based on 2-hour slot schedule (even UTC hours)
+ * @returns {string}
+ */
+export function getNextRunText() {
+  const now = new Date();
+  const utcHours = now.getUTCHours();
+  // Next even hour: if current is 13 -> 14, if 12 -> 14
+  const nextSlotHour = utcHours % 2 === 0 ? utcHours + 2 : utcHours + 1;
+  const nextSlot = new Date(now);
+  nextSlot.setUTCHours(nextSlotHour, 0, 0, 0);
+
+  const diffMs = Math.max(0, nextSlot.getTime() - now.getTime());
+  const diffMinutes = Math.floor(diffMs / (60 * 1000));
+  const h = Math.floor(diffMinutes / 60);
+  const m = diffMinutes % 60;
+
+  if (h > 0 && m > 0) {
+    return `Next run in ${h} h ${m} min`;
+  } else if (h > 0) {
+    return `Next run in ${h} h`;
+  } else {
+    return `Next run in ${m} min`;
+  }
 }

@@ -303,27 +303,28 @@ export const repo = {
   async getHealthStats() {
     const supabase = getSupabase();
 
-    // 1. Last scrape run
-    const { data: lastRun } = await supabase
-      .from('scrape_runs')
-      .select('*')
-      .order('started_at', { ascending: false })
-      .limit(1)
-      .maybeSingle();
+    const [lastRunRes, lastObsRes, activeCountRes] = await Promise.all([
+      supabase
+        .from('scrape_runs')
+        .select('*')
+        .order('started_at', { ascending: false })
+        .limit(1)
+        .maybeSingle(),
+      supabase
+        .from('price_observations')
+        .select('observed_at')
+        .order('observed_at', { ascending: false })
+        .limit(1)
+        .maybeSingle(),
+      supabase
+        .from('tracked_products')
+        .select('*', { count: 'exact', head: true })
+        .eq('is_active', true)
+    ]);
 
-    // 2. Last successful observation
-    const { data: lastObs } = await supabase
-      .from('price_observations')
-      .select('observed_at')
-      .order('observed_at', { ascending: false })
-      .limit(1)
-      .maybeSingle();
-
-    // 3. Active tracked count
-    const { count: activeCount } = await supabase
-      .from('tracked_products')
-      .select('*', { count: 'exact', head: true })
-      .eq('is_active', true);
+    const lastRun = lastRunRes.data;
+    const lastObs = lastObsRes.data;
+    const activeCount = activeCountRes.count;
 
     const now = Date.now();
     const lastSuccessMs = lastObs?.observed_at ? new Date(lastObs.observed_at).getTime() : 0;
