@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: product-price-tracker-backend
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    healthCheckPath: /api/health/live
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: STORE_ORIGIN
+        value: https://demo.inelabteamdev.com
+      - key: ATTEMPT_TIMEOUT_MS
+        value: 45000
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: CRON_SECRET
+        sync: false
