@@ -16,9 +16,9 @@ An automated web scraper and price-tracking application engineered to monitor pr
 
 ## 2. Live Links
 
-- **Live Application (Frontend)**: `https://ine-product-price-tracker.vercel.app` *(or your Vercel URL)*
-- **Backend API**: `https://ine-product-price-tracker.onrender.com` *(or your Render service URL)*
-- **Health Check**: `https://ine-product-price-tracker.onrender.com/api/health`
+- **Live Application (Frontend)**: `https://product-price-tracker-frontend-alpha.vercel.app/` 
+- **Backend API**: `https://product-price-tracker-backend-ahkz.onrender.com`
+- **Health Check**: `https://product-price-tracker-backend-ahkz.onrender.com/api/health`
 
 ---
 
