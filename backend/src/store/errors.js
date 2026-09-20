@@ -1,0 +1,71 @@
+/**
+ * store/errors.js - Typed errors and taxonomy per plan §8.6.
+ */
+
+export const ERROR_CODES = {
+  ATTEMPT_TIMEOUT: 'ATTEMPT_TIMEOUT',
+  NAV_TIMEOUT: 'NAV_TIMEOUT',
+  NETWORK_ERROR: 'NETWORK_ERROR',
+  HTTP_5XX: 'HTTP_5XX',
+  HTTP_429: 'HTTP_429',
+  HTTP_4XX_OTHER: 'HTTP_4XX_OTHER',
+  GATE_NOT_PASSED: 'GATE_NOT_PASSED',
+  TOKEN_EXPIRED: 'TOKEN_EXPIRED',
+  CLICK_NOT_REGISTERED: 'CLICK_NOT_REGISTERED',
+  CONTENT_NOT_READY: 'CONTENT_NOT_READY',
+  PRICE_UNSTABLE: 'PRICE_UNSTABLE',
+  UNEXPECTED_CONTENT: 'UNEXPECTED_CONTENT',
+  PRODUCT_MISMATCH: 'PRODUCT_MISMATCH',
+  PRICE_UNPARSEABLE: 'PRICE_UNPARSEABLE',
+  PRICE_AMBIGUOUS: 'PRICE_AMBIGUOUS',
+  PRICE_IMPLAUSIBLE: 'PRICE_IMPLAUSIBLE',
+  STOCK_MISSING: 'STOCK_MISSING',
+  STOCK_UNRECOGNIZED: 'STOCK_UNRECOGNIZED',
+  STOCK_CONFLICT: 'STOCK_CONFLICT',
+  NOT_FOUND: 'NOT_FOUND',
+  STRUCTURE_CHANGED: 'STRUCTURE_CHANGED',
+  BROWSER_CRASHED: 'BROWSER_CRASHED',
+  INTERRUPTED: 'INTERRUPTED',
+  SKIPPED_CIRCUIT_OPEN: 'SKIPPED_CIRCUIT_OPEN',
+  SKIPPED_RUN_DEADLINE: 'SKIPPED_RUN_DEADLINE',
+  PERSIST_FAILED: 'PERSIST_FAILED'
+};
+
+const RETRYABLE_CODES = new Set([
+  ERROR_CODES.ATTEMPT_TIMEOUT,
+  ERROR_CODES.NAV_TIMEOUT,
+  ERROR_CODES.NETWORK_ERROR,
+  ERROR_CODES.HTTP_5XX,
+  ERROR_CODES.HTTP_429,
+  ERROR_CODES.GATE_NOT_PASSED,
+  ERROR_CODES.TOKEN_EXPIRED,
+  ERROR_CODES.CLICK_NOT_REGISTERED,
+  ERROR_CODES.CONTENT_NOT_READY,
+  ERROR_CODES.PRICE_UNSTABLE,
+  ERROR_CODES.UNEXPECTED_CONTENT,
+  ERROR_CODES.PRODUCT_MISMATCH,
+  ERROR_CODES.BROWSER_CRASHED
+]);
+
+export class ScrapeError extends Error {
+  constructor(code, message, details = {}) {
+    super(message || code);
+    this.name = 'ScrapeError';
+    this.code = code;
+    this.retryable = details.retryable !== undefined ? Boolean(details.retryable) : RETRYABLE_CODES.has(code);
+    this.httpStatus = details.httpStatus || null;
+    this.details = details;
+    this.timestamp = Date.now();
+  }
+
+  toJSON() {
+    return {
+      name: this.name,
+      code: this.code,
+      message: this.message,
+      retryable: this.retryable,
+      httpStatus: this.httpStatus,
+      details: this.details
+    };
+  }
+}
