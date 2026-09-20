@@ -48,6 +48,20 @@ This document logs design and implementation choices, adaptations, or edge-case 
   - Cursor pagination with "Show older attempts" loading previous attempts using `before` timestamp cursor.
 - **Backend Optimization**: Added `scrape_runs(scheduled_slot)` and `price_observations` relation to `repo.getAttemptLog` in `backend/src/db/repo.js` to provide slot timing and exact saved observation data to the log rows.
 
+## Step 6: Responsive SVG Chart & Table View
+- **Multi-Layer SVG Chart Architecture** (Section 4):
+  - **ResizeObserver Integration**: Responsive width recalculation matching container width.
+  - **Layer 1 - Gridlines & Y-Axis**: 5 horizontal gridlines at 1px `--grid`, round price intervals, formatted currency labels right-aligned at x=74.
+  - **Layer 2 - Stock Band**: Height 24, radius 3 at y=226. Filled segments (`var(--stock-in)`, `var(--stock-low)`, `var(--stock-out)`) with dashed 1px outline for unrecorded slots.
+  - **Layer 3 - Scrape Run Strip**: 4x14 px bars at y=270. Filled `--live` for first-attempt success, filled `--amber` with 3.4px dot for retry success, and hollow 1.4px `--red` border for failures. Missed slots remain cleanly empty.
+  - **Layer 4 - Day Ticks**: Midnight tick markers at y=292–297 with centered IST date labels at y=310.
+  - **Layer 5 - Price Line**: 2px `--ink` stroke with round joins and caps. Solid between consecutive checks and dashed (`4 5`) across failed or missed check gaps. 4.5px solid ink end dot on the latest point.
+  - **Layer 6 - Hover Guide & Interactive Tooltip**: Dashed vertical guide line with 5.5px white/ink circle marker. Tooltip in `--ink` displays IST timestamp, big price in Bricolage 22, stock phrasing, and outcome sentence. Arrow key navigation supported when region is focused.
+  - **Legend**: Swatches for first-try success, retry success with dot, hollow red failure, and dashed gap indicator.
+- **Table View**:
+  - Alternate view switchable via segmented control rendering Time, Price, and Stock columns newest first.
+
+
 
 
 

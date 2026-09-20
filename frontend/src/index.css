@@ -642,6 +642,143 @@ button:disabled {
   color: var(--ink);
 }
 
+/* Chart Section */
+.chart-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chart-header-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.chart-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.chart-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+  color: var(--ink);
+}
+
+.chart-subtitle {
+  font-size: 13px;
+  color: var(--slate);
+}
+
+.chart-controls-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chart-svg-container:focus-visible {
+  outline: 2px solid var(--live);
+  border-radius: 6px;
+}
+
+/* Chart Tooltip */
+.chart-tooltip {
+  background-color: var(--ink);
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  box-shadow: 0 4px 16px rgba(19, 35, 43, 0.25);
+  transition: top 0.05s ease, left 0.05s ease;
+}
+
+.chart-tooltip-time {
+  font-size: 12px;
+  color: var(--paper);
+}
+
+.chart-tooltip-price {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  color: #FFFFFF;
+  line-height: 1.15;
+}
+
+.chart-tooltip-stock {
+  font-size: 12px;
+  color: #FFFFFF;
+}
+
+.chart-tooltip-outcome {
+  font-size: 12px;
+  color: var(--amber-tint);
+}
+
+/* Chart Legend */
+.chart-legend {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  font-size: 13px;
+  color: var(--slate);
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-swatch {
+  width: 4px;
+  height: 14px;
+  border-radius: 1px;
+  position: relative;
+  display: inline-block;
+}
+
+.legend-swatch.first-try {
+  background-color: var(--live);
+}
+
+.legend-swatch.retry-success {
+  background-color: var(--amber);
+}
+
+.legend-swatch.retry-success .legend-dot {
+  position: absolute;
+  top: -5px;
+  left: 0.3px;
+  width: 3.4px;
+  height: 3.4px;
+  border-radius: 50%;
+  background-color: var(--amber);
+}
+
+.legend-swatch.failed {
+  border: 1.4px solid var(--red);
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+.legend-dashed-line {
+  width: 24px;
+  height: 0;
+  border-top: 2px dashed var(--ink);
+  display: inline-block;
+}
+
 /* Scrape Log Section */
 .scrape-log-section {
   display: flex;
