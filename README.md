@@ -210,8 +210,6 @@ npm run baseline:update
 
 ## 8. Short Design Note
 
-*(For full technical post-mortem and root cause analysis, see [challenges.md](file:///home/epsilon/Codedump/INE/Product-Price-Tracker/challenges.md))*
-
 ### How Scraping Reliability Was Achieved
 1. **Dynamic Server Clock Synchronization**: The mock store requires cryptographic proof-of-work and time-sensitive session attestations. To prevent local or server clock drift from causing HTTP 401s, `browserPool.js` dynamically syncs with the store server’s timestamp (`/api/challenge`) and injects an aligned `Date.now()` into the browser context.
 2. **Realistic Interaction Telemetry**: The store disables the "Reveal price" button until mouse dwell and movement thresholds are satisfied. The scraper computes element bounding boxes and dispatches realistic mouse curves before triggering the click.

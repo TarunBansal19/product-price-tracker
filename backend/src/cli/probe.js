@@ -120,6 +120,7 @@ async function main() {
 
   // Save report to docs/verification.md
   const verPath = path.resolve(__dirname, '../../../docs/verification.md');
+  await fs.mkdir(path.dirname(verPath), { recursive: true });
   await fs.writeFile(verPath, report, 'utf-8');
   console.log(`Saved probe results to ${verPath}`);
 }
