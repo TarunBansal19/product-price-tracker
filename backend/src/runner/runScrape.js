@@ -73,6 +73,8 @@ export async function runScrape(runId, { trigger = 'cron' } = {}) {
     // 3. Acquire Chromium instance
     browser = await getBrowser({ headed: false });
 
+    const failedProducts = [];
+
     // 4. Sequential loop over products (CONCURRENCY = 1 for memory and politeness)
     for (let i = 0; i < trackedList.length; i++) {
       const product = trackedList[i];
@@ -154,6 +156,7 @@ export async function runScrape(runId, { trigger = 'cron' } = {}) {
           product,
           runId,
           browser,
+          startAttempt: 1,
           maxAttempts: config.MAX_ATTEMPTS,
           jobDeadlineMs: config.JOB_DEADLINE_MS,
           persist: true,
@@ -166,11 +169,13 @@ export async function runScrape(runId, { trigger = 'cron' } = {}) {
         } else {
           productsFailed++;
           circuitBreaker.recordFailure(jobResult.error?.code);
+          failedProducts.push({ product, lastAttempt: jobResult.attemptsCount || config.MAX_ATTEMPTS });
         }
       } catch (jobErr) {
         console.error(`[runScrape] Uncaught error in product ${prodId} job: ${jobErr.message}`);
         productsFailed++;
         circuitBreaker.recordFailure(jobErr.code || ERROR_CODES.ATTEMPT_TIMEOUT);
+        failedProducts.push({ product, lastAttempt: config.MAX_ATTEMPTS });
       } finally {
         // Release product lease
         try {
@@ -181,6 +186,57 @@ export async function runScrape(runId, { trigger = 'cron' } = {}) {
       // Politeness jitter delay between products: 500ms – 1500ms per §8.5
       const interProductDelay = 500 + Math.floor(Math.random() * 1000);
       await new Promise(r => setTimeout(r, interProductDelay));
+    }
+
+    // 5. Deferred retry pass (P1 per §8.5): temporal failures may resolve after the rest of the run
+    if (
+      failedProducts.length > 0 &&
+      circuitBreaker.canExecute() &&
+      finalStatus !== 'aborted' &&
+      (Date.now() - runStartTime < config.RUN_DEADLINE_MS - 60000)
+    ) {
+      console.log(`[runScrape] Starting deferred-retry pass for ${failedProducts.length} failed product(s)...`);
+      await new Promise(r => setTimeout(r, 4000));
+
+      for (const { product, lastAttempt } of failedProducts) {
+        if (Date.now() - runStartTime >= config.RUN_DEADLINE_MS) break;
+        if (!circuitBreaker.canExecute()) break;
+
+        let hasLease = false;
+        try {
+          hasLease = await repo.claimProduct(product.id, 120);
+        } catch {}
+
+        if (!hasLease) continue;
+
+        try {
+          const deferredAttempt = lastAttempt + 1;
+          console.log(`[runScrape] Deferred retry for product ${product.store_product_id} (attempt ${deferredAttempt})...`);
+          const deferredResult = await executeProductJob({
+            product,
+            runId,
+            browser,
+            startAttempt: deferredAttempt,
+            maxAttempts: deferredAttempt,
+            jobDeadlineMs: 45000,
+            persist: true,
+            onNarrative: (msg) => console.log(`  [deferred] ${msg}`)
+          });
+
+          if (deferredResult.success) {
+            productsOk++;
+            productsFailed--;
+            circuitBreaker.recordSuccess();
+            console.log(`[runScrape] Deferred retry SUCCEEDED for product ${product.store_product_id}!`);
+          }
+        } catch (deferredErr) {
+          console.warn(`[runScrape] Deferred retry failed for product ${product.store_product_id}: ${deferredErr.message}`);
+        } finally {
+          try {
+            await repo.releaseProduct(product.id);
+          } catch {}
+        }
+      }
     }
 
     if (finalStatus !== 'aborted') {

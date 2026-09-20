@@ -19,6 +19,7 @@ export async function executeProductJob({
   runId = null,
   browser,
   signal = null,
+  startAttempt = 1,
   maxAttempts = config.MAX_ATTEMPTS,
   jobDeadlineMs = config.JOB_DEADLINE_MS,
   persist = true,
@@ -33,12 +34,12 @@ export async function executeProductJob({
     if (onNarrative) onNarrative(msg);
   };
 
-  logNarrative(`starting scrape job for product ${productId} (up to ${maxAttempts} attempts)`);
+  logNarrative(`starting scrape job for product ${productId} (attempts ${startAttempt} to ${maxAttempts})`);
 
   let lastError = null;
   let finalObservation = null;
 
-  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+  for (let attempt = startAttempt; attempt <= maxAttempts; attempt++) {
     const attemptStart = Date.now();
 
     // Check job deadline
