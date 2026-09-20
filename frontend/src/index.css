@@ -985,3 +985,130 @@ button:disabled {
   font-size: 13px;
   color: var(--muted);
 }
+
+/* ==========================================================================
+   Section 8: Responsive & Accessibility Rules
+   ========================================================================== */
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Below 1024px: Rail becomes a top bar; main keeps a single column with 24px padding */
+@media (max-width: 1023px) {
+  .app-shell {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+
+  .rail {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--grid);
+    padding: 20px 24px;
+    gap: 16px;
+    overflow: visible;
+  }
+
+  /* Tracked list becomes a horizontally scrolling strip */
+  .rail-tracked-list {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 8px;
+    padding-bottom: 6px;
+    flex: none;
+    width: 100%;
+  }
+
+  .tracked-row {
+    min-width: 200px;
+    flex-shrink: 0;
+  }
+
+  .main-workspace {
+    padding: 24px;
+    gap: 24px;
+    height: auto;
+    overflow-y: visible;
+  }
+
+  .empty-state {
+    padding-top: 60px;
+  }
+}
+
+/* Below 720px: Stacked log table rows; horizontal range control scrolling; hidden middle y labels */
+@media (max-width: 719px) {
+  .product-title-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .product-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .chart-controls-row {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  /* Log table becomes stacked rows */
+  .scrape-log-table,
+  .scrape-log-table tbody,
+  .scrape-log-table tr,
+  .scrape-log-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .scrape-log-table thead {
+    display: none;
+  }
+
+  .scrape-log-table tr {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--grid);
+  }
+
+  .scrape-log-table td {
+    padding: 2px 0;
+    border-bottom: none;
+  }
+
+  .scrape-log-table .col-time {
+    font-size: 12px;
+    color: var(--slate);
+  }
+
+  .scrape-log-table .col-outcome {
+    margin: 4px 0;
+  }
+
+  .scrape-log-table .col-attempt,
+  .scrape-log-table .col-took {
+    display: inline-block;
+    width: auto;
+    margin-right: 12px;
+    font-size: 13px;
+    color: var(--slate);
+  }
+
+  .scrape-log-table td:last-child {
+    margin-top: 4px;
+  }
+}

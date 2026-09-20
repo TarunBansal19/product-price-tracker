@@ -61,6 +61,22 @@ This document logs design and implementation choices, adaptations, or edge-case 
 - **Table View**:
   - Alternate view switchable via segmented control rendering Time, Price, and Stock columns newest first.
 
+## Step 7: Responsive Pass & Accessibility Pass
+- **Responsive Layout (< 1024px tablet & small desktop)**:
+  - App shell switches from dual column to vertical column stack (`flex-direction: column`).
+  - Left rail transitions into a top header bar with wordmark, search, and a horizontal scrolling strip for the tracked products.
+  - Workspace padding adjusts to 24px and empty state top padding adapts to 60px.
+- **Mobile Adaptations (< 720px)**:
+  - Product header stacks title and action buttons vertically.
+  - Scrape log table transitions into stacked card-like rows with time, badge, attempt number, took time, and error details clearly readable without horizontal table overflow.
+  - Range and view segmented controls scroll horizontally if needed.
+- **Accessibility & Reduced Motion**:
+  - `outline: 2px solid var(--live); outline-offset: 2px;` visible focus indicator on all interactive controls.
+  - Arrow key navigation in autocomplete search dropdown and on the chart plot.
+  - `prefers-reduced-motion: reduce` resets all transitions and animations to 0.01ms.
+  - Color is never the sole indicator: status badges include text labels and dots; scrape strip bars use filled, dot-topped, and hollow geometric shapes.
+
+
 
 
 
