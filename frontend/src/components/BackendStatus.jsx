@@ -6,13 +6,14 @@ export function BackendStatus({ onHealthUpdate }) {
   const [health, setHealth] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [nextRun, setNextRun] = useState(getNextRunText());
+  const [nextRun, setNextRun] = useState('');
 
   const fetchHealth = async () => {
     try {
       const data = await api.getHealth();
       setHealth(data);
       setError(null);
+      setNextRun(getNextRunText(data?.db?.lastRun?.started_at));
       if (onHealthUpdate) {
         onHealthUpdate(data);
       }
@@ -28,18 +29,18 @@ export function BackendStatus({ onHealthUpdate }) {
 
   useEffect(() => {
     fetchHealth();
-    // Poll health every 30 seconds
     const interval = setInterval(fetchHealth, 30000);
-    // Update next run text every minute
-    const timer = setInterval(() => {
-      setNextRun(getNextRunText());
-    }, 60000);
-
-    return () => {
-      clearInterval(interval);
-      clearInterval(timer);
-    };
+    return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    const updateCountdown = () => {
+      setNextRun(getNextRunText(health?.db?.lastRun?.started_at));
+    };
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 30000);
+    return () => clearInterval(timer);
+  }, [health]);
 
   let dotClass = 'healthy';
   let statusText = 'Backend healthy';
@@ -74,3 +75,4 @@ export function BackendStatus({ onHealthUpdate }) {
     </div>
   );
 }
+

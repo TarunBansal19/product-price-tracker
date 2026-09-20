@@ -121,19 +121,29 @@ export function formatDistanceToNow(ts) {
 }
 
 /**
- * Calculate text for next run based on 2-hour slot schedule (even UTC hours)
+ * Calculate text for next run based on last run time + 2-hour interval.
+ * Derives the schedule from the actual last run rather than assuming
+ * a fixed UTC-hour grid, so it works regardless of cron timezone.
+ * @param {string|null} lastRunStartedAt - ISO timestamp of the last run
  * @returns {string}
  */
-export function getNextRunText() {
-  const now = new Date();
-  const utcHours = now.getUTCHours();
-  // Next even hour: if current is 13 -> 14, if 12 -> 14
-  const nextSlotHour = utcHours % 2 === 0 ? utcHours + 2 : utcHours + 1;
-  const nextSlot = new Date(now);
-  nextSlot.setUTCHours(nextSlotHour, 0, 0, 0);
+export function getNextRunText(lastRunStartedAt) {
+  const INTERVAL_MS = 2 * 60 * 60 * 1000; // 2 hours
+  const now = Date.now();
 
-  const diffMs = Math.max(0, nextSlot.getTime() - now.getTime());
-  const diffMinutes = Math.floor(diffMs / (60 * 1000));
+  if (!lastRunStartedAt) {
+    return 'Next run: waiting for first cron';
+  }
+
+  let nextRun = new Date(lastRunStartedAt).getTime() + INTERVAL_MS;
+
+  // If that's already in the past, advance by intervals until it's in the future
+  while (nextRun <= now) {
+    nextRun += INTERVAL_MS;
+  }
+
+  const diffMs = nextRun - now;
+  const diffMinutes = Math.max(1, Math.ceil(diffMs / (60 * 1000)));
   const h = Math.floor(diffMinutes / 60);
   const m = diffMinutes % 60;
 
