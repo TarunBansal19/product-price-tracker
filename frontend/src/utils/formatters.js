@@ -6,6 +6,7 @@
 
 /**
  * Format timestamp in IST (Asia/Kolkata) with UTC tooltip value
+ * e.g. "Sep 20, 12:30:07 PM"
  * @param {string|Date} ts
  * @returns {{ text: string, utc: string }}
  */
@@ -13,18 +14,17 @@ export function formatTimestamp(ts) {
   if (!ts) return { text: '—', utc: '' };
   try {
     const date = new Date(ts);
-    if (isNaN(date.getTime())) return { text: 'Invalid date', utc: '' };
+    if (isNaN(date.getTime())) return { text: '—', utc: '' };
 
-    const istString = date.toLocaleString('en-IN', {
+    const istString = date.toLocaleString('en-US', {
       timeZone: 'Asia/Kolkata',
-      year: 'numeric',
       month: 'short',
-      day: '2-digit',
-      hour: '2-digit',
+      day: 'numeric',
+      hour: 'numeric',
       minute: '2-digit',
       second: '2-digit',
       hour12: true
-    }) + ' IST';
+    });
 
     const utcString = date.toISOString().replace('T', ' ').replace('Z', ' UTC');
 
@@ -32,6 +32,23 @@ export function formatTimestamp(ts) {
   } catch {
     return { text: String(ts), utc: '' };
   }
+}
+
+/**
+ * Format duration in ms into readable seconds or minutes
+ * e.g. "6.2 s", "2 min 4 s"
+ * @param {number|null} durationMs
+ * @returns {string}
+ */
+export function formatDuration(durationMs) {
+  if (durationMs === null || durationMs === undefined) return '—';
+  const sec = durationMs / 1000;
+  if (sec < 60) {
+    return `${sec.toFixed(1)} s`;
+  }
+  const min = Math.floor(sec / 60);
+  const remSec = Math.round(sec % 60);
+  return `${min} min ${remSec} s`;
 }
 
 /**

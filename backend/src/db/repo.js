@@ -287,7 +287,7 @@ export const repo = {
     const supabase = getSupabase();
     let q = supabase
       .from('scrape_attempts')
-      .select('id, run_id, attempt_number, started_at, finished_at, duration_ms, outcome, error_code, error_message, http_status, strategy, scraper_version')
+      .select('id, run_id, attempt_number, started_at, finished_at, duration_ms, outcome, error_code, error_message, http_status, strategy, scraper_version, scrape_runs(scheduled_slot), price_observations(price_minor, currency, stock_state, stock_quantity)')
       .eq('tracked_product_id', trackedProductId)
       .order('started_at', { ascending: false })
       .limit(limit);
@@ -297,7 +297,13 @@ export const repo = {
 
     const { data, error } = await q;
     if (error) throw new Error(`getAttemptLog failed: ${error.message}`);
-    return data || [];
+    
+    // Flatten scheduled_slot for convenience
+    return (data || []).map(row => ({
+      ...row,
+      scheduled_slot: row.scrape_runs?.scheduled_slot || null,
+      observation: Array.isArray(row.price_observations) ? row.price_observations[0] : row.price_observations
+    }));
   },
 
   async getHealthStats() {

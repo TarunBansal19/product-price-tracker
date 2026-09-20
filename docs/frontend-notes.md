@@ -37,5 +37,17 @@ This document logs design and implementation choices, adaptations, or edge-case 
     - Third part: "Last checked X minutes ago." using last successful observation timestamp.
     - Fourth part: If newest scrape attempt failed, displays "The latest check failed; showing the last good price." in `--red`.
 
+## Step 5: Scrape Log Table with Filters and Pagination
+- **Scrape Log Header & Controls**:
+  - Title in Bricolage Grotesque 22px 500, subtitle in 13px `--slate`.
+  - Segmented filter controls for `All`, `Retried`, `Failed` directly driving server-side filtering via `GET /api/tracked/:id/log?outcome=...`.
+- **Scrape Log Table**:
+  - Column layout matches reference: Time (190px), Outcome (120px), Attempt (90px), Took (90px), What happened (flexible).
+  - Outcome pills: Success (`--live-tint` bg, `--live` dot), Retried (`--amber-tint` bg, `--amber` dot), Failed (`--red-tint` bg, `--red` dot).
+  - "What happened": Error code in weight 500 followed by plain English sentence explaining the cause without raw stack traces. For successes, shows saved price and stock.
+  - Cursor pagination with "Show older attempts" loading previous attempts using `before` timestamp cursor.
+- **Backend Optimization**: Added `scrape_runs(scheduled_slot)` and `price_observations` relation to `repo.getAttemptLog` in `backend/src/db/repo.js` to provide slot timing and exact saved observation data to the log rows.
+
+
 
 

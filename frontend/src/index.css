@@ -613,6 +613,186 @@ button:disabled {
   color: var(--red);
 }
 
+/* Segmented Control */
+.segmented-control {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--paper);
+  border-radius: 8px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.segmented-option {
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--slate);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  line-height: 1;
+}
+
+.segmented-option.active {
+  background-color: var(--sheet);
+  color: var(--ink);
+}
+
+/* Scrape Log Section */
+.scrape-log-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.scrape-log-header-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.scrape-log-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.scrape-log-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+  color: var(--ink);
+}
+
+.scrape-log-subtitle {
+  font-size: 13px;
+  color: var(--slate);
+}
+
+/* Scrape Log Table */
+.scrape-log-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.scrape-log-table th {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--slate);
+  text-align: left;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--grid);
+}
+
+.scrape-log-table td {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--grid);
+  font-size: 14px;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  vertical-align: middle;
+}
+
+.col-time {
+  width: 190px;
+}
+
+.col-outcome {
+  width: 120px;
+}
+
+.col-attempt {
+  width: 90px;
+}
+
+.col-took {
+  width: 90px;
+}
+
+/* Outcome Badges */
+.outcome-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.outcome-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.outcome-badge.success {
+  background-color: var(--live-tint);
+}
+.outcome-badge.success .outcome-dot {
+  background-color: var(--live);
+}
+
+.outcome-badge.retried {
+  background-color: var(--amber-tint);
+}
+.outcome-badge.retried .outcome-dot {
+  background-color: var(--amber);
+}
+
+.outcome-badge.failed {
+  background-color: var(--red-tint);
+}
+.outcome-badge.failed .outcome-dot {
+  background-color: var(--red);
+}
+
+.what-happened-text {
+  font-size: 14px;
+}
+
+.what-happened-code {
+  font-weight: 500;
+  color: var(--ink);
+  margin-right: 8px;
+}
+
+.what-happened-desc {
+  color: var(--slate);
+}
+
+.scrape-log-footer {
+  padding-top: 4px;
+}
+
+.btn-show-older {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--slate);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.btn-show-older:hover:not(:disabled) {
+  color: var(--ink);
+}
+
 /* Waking up banner for cold-start */
 .wakeup-banner {
   background-color: var(--amber-tint);

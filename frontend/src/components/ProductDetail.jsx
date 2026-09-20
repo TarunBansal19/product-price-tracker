@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ProductHeader } from './ProductHeader.jsx';
 import { PriceBlock } from './PriceBlock.jsx';
+import { ScrapeLog } from './ScrapeLog.jsx';
 import { api } from '../api.js';
 
 export function ProductDetail({ product, onProductUpdated, onUntrack }) {
@@ -68,7 +69,8 @@ export function ProductDetail({ product, onProductUpdated, onUntrack }) {
         selectedRange={selectedRange}
       />
 
-      {/* Placeholder for Step 6: Chart and Step 5: Scrape Log */}
+      {/* 3. Scrape Log Section (Section 5) */}
+      <ScrapeLog productId={product.id} />
     </div>
   );
 }
