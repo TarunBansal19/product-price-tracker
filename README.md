@@ -1,4 +1,4 @@
-# INE Product Price Tracker (Web Scraping Assignment)
+# Product Price Tracker (Web Scraping Assignment)
 
 A resilient, production-grade full-stack web application built for the **INE Software Engineer Intern Assignment**. It monitors and tracks product pricing and stock availability over time from INE's hosted mock store (`https://demo.inelabteamdev.com`), engineered specifically for long-term unattended reliability on free-tier infrastructure.
 
@@ -10,7 +10,6 @@ A resilient, production-grade full-stack web application built for the **INE Sof
 - **Backend API**: [https://product-price-tracker-backend-ahkz.onrender.com](https://product-price-tracker-backend-ahkz.onrender.com) *(Render Docker)*
 - **API Health Check**: [https://product-price-tracker-backend-ahkz.onrender.com/api/health/live](https://product-price-tracker-backend-ahkz.onrender.com/api/health/live)
 - **Target Mock Store**: [https://demo.inelabteamdev.com](https://demo.inelabteamdev.com)
-- **Video Walkthrough (Headed Run Demo)**: *(Include your recording link here, e.g. Loom / Google Drive / YouTube)*
 
 ---
 
