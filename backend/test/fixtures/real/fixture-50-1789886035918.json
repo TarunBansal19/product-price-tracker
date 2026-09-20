@@ -1,0 +1,241 @@
+{
+  "capturedAt": "2026-09-20T06:33:55.918Z",
+  "url": "https://demo.inelabteamdev.com/product/50",
+  "productId": "50",
+  "durationMs": 9293,
+  "rawProductJson": {
+    "id": 50,
+    "slug": "auralite-smart-bulb-pro",
+    "name": "Auralite Smart Bulb Pro",
+    "brand": "Auralite",
+    "category": "Smart Home",
+    "sku": "AUR-10050",
+    "description": "The Auralite Smart Bulb Pro. A dependable smart home pick with a clean, no-nonsense design and the everyday features you actually use.",
+    "specs": {
+      "warranty": "2 years international warranty",
+      "inTheBox": "Smart Bulb, Adhesive pad, Setup guide",
+      "countryOfOrigin": "Taiwan",
+      "returns": "30-day return, original packaging",
+      "support": "In-app chat, 8am–8pm IST",
+      "weightGrams": 680,
+      "material": "Flame-retardant polycarbonate",
+      "colour": "Olive",
+      "modelYear": 2024
+    },
+    "reviews": [
+      {
+        "id": "50-r3",
+        "author": "Pooja J.",
+        "rating": 4,
+        "title": "Exactly what I wanted",
+        "body": "Bought this after returning two other brands. Nothing has rattled loose or started creaking yet. Matches the listing description exactly. Would buy the same one again.",
+        "date": "2025-04-29",
+        "verifiedPurchase": true,
+        "helpfulVotes": 166
+      },
+      {
+        "id": "50-r2",
+        "author": "Priya C.",
+        "rating": 5,
+        "title": "Exactly what I wanted",
+        "body": "Bought this after returning two other brands. Nothing has rattled loose or started creaking yet. Second Auralite product I own and both have lasted. No regrets.",
+        "date": "2025-04-04",
+        "verifiedPurchase": true,
+        "helpfulVotes": 143
+      },
+      {
+        "id": "50-r4",
+        "author": "Ishaan N.",
+        "rating": 1,
+        "title": "Not for me",
+        "body": "Ordered twice, same problem both times. Support were polite but slow to respond. Expected more from Auralite. Cannot recommend it as-is.",
+        "date": "2025-03-14",
+        "verifiedPurchase": true,
+        "helpfulVotes": 211
+      },
+      {
+        "id": "50-r1",
+        "author": "Devansh B.",
+        "rating": 3,
+        "title": "Does the job",
+        "body": "Works well enough for what I paid. Slightly heavier in hand than the listing suggests. Packaging was fine, the manual less so. Still, I am keeping it.",
+        "date": "2024-09-26",
+        "verifiedPurchase": true,
+        "helpfulVotes": 28
+      },
+      {
+        "id": "50-r5",
+        "author": "Farah R.",
+        "rating": 4,
+        "title": "Solid, boring, reliable",
+        "body": "Replaced a five-year-old unit with this. It does the one job it advertises and does it well. Auralite seem to have got this one right. No regrets.",
+        "date": "2024-04-27",
+        "verifiedPurchase": false,
+        "helpfulVotes": 180
+      }
+    ]
+  },
+  "rawPriceResponse": {
+    "productId": 50,
+    "v": 1,
+    "e": "7MY9iCN4vszdXMbMhgZgHBU2FeBkxBjfTWKZHedqd9mm3WGIemu83qQnuMzHBi4KHz4Q6HHeQstHZJ4A9y95weXGd5k3fKrenwrI1NoRahwTIwWjJMRA3yE2w0WkfjDD2JE5xnw9pNDPDY7M0RN2ClMtHfIlhxabGCXAVKE7ecHwxneaNWvg3tdLhIyYVHgEB3cF6nib",
+    "serverTime": 1789886033126
+  },
+  "rawLayoutJson": {
+    "revision": 627001,
+    "variant": 0,
+    "validUntil": 1789900902742,
+    "classes": {
+      "priceWrap": "pw-a7",
+      "priceValue": "pv-a7",
+      "mrp": "mr-a7",
+      "sale": "sl-a7",
+      "badge": "bd-a7",
+      "rating": "rt-a7",
+      "seller": "sr-a7",
+      "delivery": "dl-a7",
+      "stock": "st-a7"
+    },
+    "order": [
+      "rating",
+      "seller",
+      "delivery",
+      "stock"
+    ],
+    "priceTag": "span",
+    "priceCarrier": "text",
+    "ratingAria": true,
+    "sellerTitle": true
+  },
+  "authoritativeQuote": {
+    "p": 18005,
+    "m": 40920,
+    "b": 54,
+    "s": 19,
+    "c": "INR",
+    "t": 1789886033126,
+    "r": 3.5,
+    "rc": 15046,
+    "sl": "Vantage Outlet",
+    "dd": 7,
+    "v": "malformed",
+    "g": 0,
+    "f": "nbsp",
+    "x": 0
+  },
+  "dom": {
+    "blockHtml": "<div class=\"price-block price-success pw-a7\" aria-live=\"polite\"><div class=\"price-main\"><span class=\"price-value\" aria-hidden=\"true\" style=\"display: none;\">₹18,638</span><span class=\"mr-a7\" style=\"text-decoration: line-through; opacity: 0.55; margin-right: 10px;\">₹40,920</span><span class=\"vkmwwpn pv-a7\" style=\"font-family: var(--serif); font-size: 2.4rem; font-weight: 700; letter-spacing: -0.02em; opacity: 1;\">₹&nbsp;​1&nbsp;​8&nbsp;​,&nbsp;​0&nbsp;​0&nbsp;​5</span><span class=\"bd-a7\" style=\"margin-left: 10px; color: rgb(47, 133, 90); font-weight: 600;\">54% off</span><span class=\"amount\" data-price=\"true\" aria-hidden=\"true\" style=\"display: none;\">₹21,030</span></div><div class=\"price-facets\"><div class=\"rt-a7\" aria-label=\"Rated 3.5 out of 5\"><span style=\"display: inline-block; width: 90px; height: 10px; background: rgb(226, 232, 240); border-radius: 5px; vertical-align: middle;\"><span style=\"display: block; width: 70%; height: 100%; background: rgb(214, 158, 46); border-radius: 5px;\"></span></span> <small>15k ratings</small></div><div class=\"sr-a7\" title=\"Vantage Outlet\"><small>Sold by <span>Van</span>​<span>tage Outlet</span></small></div><div class=\"dl-a7\"><small>Get it by Sun, 27 Sept</small></div><div class=\"st-a7\"><span class=\"stock-badge in-stock\">Hurry, just 19 left</span></div></div><div class=\"price-meta\"><span>Loaded in 1 attempt</span><button type=\"button\" class=\"btn btn-ghost btn-sm\">Refresh price</button></div></div>",
+    "blockText": "₹40,920\n₹ ​1 ​8 ​, ​0 ​0 ​5\n54% off\n 15k ratings\nSold by Van​tage Outlet\nGet it by Sun, 27 Sept\nHURRY, JUST 19 LEFT\nLoaded in 1 attempt\nREFRESH PRICE",
+    "candidates": [
+      {
+        "tagName": "SPAN",
+        "className": "price-value",
+        "text": "₹18,638",
+        "visible": false,
+        "struckThrough": false,
+        "fontSize": "38.4px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "mr-a7",
+        "text": "₹40,920",
+        "visible": true,
+        "struckThrough": true,
+        "fontSize": "16px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "vkmwwpn pv-a7",
+        "text": "₹ ​1 ​8 ​, ​0 ​0 ​5",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "38.4px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "bd-a7",
+        "text": "54% off",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "16px",
+        "color": "rgb(47, 133, 90)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "amount",
+        "text": "₹21,030",
+        "visible": false,
+        "struckThrough": false,
+        "fontSize": "16px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SMALL",
+        "className": "",
+        "text": "15k ratings",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "13.3333px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "",
+        "text": "Van",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "13.3333px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "",
+        "text": "tage Outlet",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "13.3333px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SMALL",
+        "className": "",
+        "text": "Get it by Sun, 27 Sept",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "13.3333px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "stock-badge in-stock",
+        "text": "HURRY, JUST 19 LEFT",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "10.56px",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "",
+        "text": "Loaded in 1 attempt",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "12.16px",
+        "color": "rgb(118, 118, 118)"
+      },
+      {
+        "tagName": "BUTTON",
+        "className": "btn btn-ghost btn-sm",
+        "text": "REFRESH PRICE",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "11.52px",
+        "color": "rgb(17, 17, 17)"
+      }
+    ]
+  },
+  "notes": "Captured live from https://demo.inelabteamdev.com/product/50 on 2026-09-20T06:33:55.918Z"
+}

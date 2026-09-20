@@ -1,0 +1,250 @@
+{
+  "capturedAt": "2026-09-20T06:33:37.326Z",
+  "url": "https://demo.inelabteamdev.com/product/206",
+  "productId": "206",
+  "durationMs": 7689,
+  "rawProductJson": {
+    "id": 206,
+    "slug": "amperage-usb-hub-air",
+    "name": "Amperage USB Hub Air",
+    "brand": "Amperage",
+    "category": "Power",
+    "sku": "AMP-10206",
+    "description": "The Amperage USB Hub Air. A dependable power pick with a clean, no-nonsense design and the everyday features you actually use.",
+    "specs": {
+      "warranty": "3 years limited warranty",
+      "inTheBox": "USB Hub, Warranty card, Quick-start guide",
+      "countryOfOrigin": "Vietnam",
+      "returns": "14-day return, restocking fee applies",
+      "support": "Email only, 48-hour response",
+      "weightGrams": 637,
+      "material": "Recycled polycarbonate",
+      "colour": "Olive",
+      "modelYear": 2023
+    },
+    "reviews": [
+      {
+        "id": "206-r6",
+        "author": "Ananya M.",
+        "rating": 5,
+        "title": "Worth every rupee",
+        "body": "Picked it up on a whim and it has earned its place. Setup took under ten minutes with no surprises. Second Amperage product I own and both have lasted. Would buy the same one again.",
+        "date": "2025-06-11",
+        "verifiedPurchase": true,
+        "helpfulVotes": 126
+      },
+      {
+        "id": "206-r5",
+        "author": "Ishaan G.",
+        "rating": 3,
+        "title": "Decent but not perfect",
+        "body": "Mixed feelings after a few weeks of use. Performance is fine, the packaging was a mess. Amperage have made better, but this is serviceable. Still, I am keeping it.",
+        "date": "2024-11-11",
+        "verifiedPurchase": true,
+        "helpfulVotes": 230
+      },
+      {
+        "id": "206-r2",
+        "author": "Karthik J.",
+        "rating": 5,
+        "title": "Better than expected",
+        "body": "Been using this daily for about three months now. Setup took under ten minutes with no surprises. Second Amperage product I own and both have lasted. Happy to recommend it.",
+        "date": "2024-09-01",
+        "verifiedPurchase": true,
+        "helpfulVotes": 30
+      },
+      {
+        "id": "206-r1",
+        "author": "Sana D.",
+        "rating": 5,
+        "title": "Worth every rupee",
+        "body": "Been using this daily for about three months now. It does the one job it advertises and does it well. Amperage seem to have got this one right. No regrets.",
+        "date": "2024-08-10",
+        "verifiedPurchase": true,
+        "helpfulVotes": 205
+      },
+      {
+        "id": "206-r4",
+        "author": "Farah H.",
+        "rating": 5,
+        "title": "Worth every rupee",
+        "body": "Been using this daily for about three months now. It does the one job it advertises and does it well. Second Amperage product I own and both have lasted. Happy to recommend it.",
+        "date": "2024-07-15",
+        "verifiedPurchase": true,
+        "helpfulVotes": 34
+      },
+      {
+        "id": "206-r3",
+        "author": "Lakshmi P.",
+        "rating": 5,
+        "title": "Would buy again",
+        "body": "Picked it up on a whim and it has earned its place. Setup took under ten minutes with no surprises. Matches the listing description exactly. Holding up well so far.",
+        "date": "2023-12-11",
+        "verifiedPurchase": true,
+        "helpfulVotes": 154
+      }
+    ]
+  },
+  "rawPriceResponse": {
+    "productId": 206,
+    "v": 1,
+    "e": "4+/OCzAmz3hyYA5hCH46IU9604MZHwfT82xg5HhLaTf774QLQ1GkbnJgF2EIfj4tRW7J1wsUAdHoeT/kMFl/Jrb8kgt4fNR2bXBWcABjK2YQdMvDdUpHkbc5eqgmWxdw7KzXRSgz1Cg6YFlwHm1/N0Z0ko1eRFvH82x05HhLaTfg74QZdw==",
+    "serverTime": 1789886014477
+  },
+  "rawLayoutJson": {
+    "revision": 627001,
+    "variant": 0,
+    "validUntil": 1789900902742,
+    "classes": {
+      "priceWrap": "pw-a7",
+      "priceValue": "pv-a7",
+      "mrp": "mr-a7",
+      "sale": "sl-a7",
+      "badge": "bd-a7",
+      "rating": "rt-a7",
+      "seller": "sr-a7",
+      "delivery": "dl-a7",
+      "stock": "st-a7"
+    },
+    "order": [
+      "rating",
+      "seller",
+      "delivery",
+      "stock"
+    ],
+    "priceTag": "span",
+    "priceCarrier": "text",
+    "ratingAria": true,
+    "sellerTitle": true
+  },
+  "authoritativeQuote": {
+    "p": 994,
+    "m": 1343,
+    "b": 26,
+    "s": 0,
+    "c": "INR",
+    "t": 1789886014477,
+    "r": 3.1,
+    "rc": 32532,
+    "sl": "Northwind Retail",
+    "dd": 3,
+    "v": "clean",
+    "g": 0,
+    "x": 0
+  },
+  "dom": {
+    "blockHtml": "<div class=\"price-block price-success pw-a7\" aria-live=\"polite\"><div class=\"price-main\"><span class=\"price-value\" aria-hidden=\"true\" style=\"display: none;\">₹1,198</span><span class=\"mr-a7\" style=\"text-decoration: line-through; opacity: 0.55; margin-right: 10px;\">₹1,343</span><span class=\"vzihf0u pv-a7\" style=\"font-family: var(--serif); font-size: 2.4rem; font-weight: 700; letter-spacing: -0.02em; opacity: 1;\">₹994</span><span class=\"bd-a7\" style=\"margin-left: 10px; color: rgb(47, 133, 90); font-weight: 600;\">26% off</span><span class=\"amount\" data-price=\"true\" aria-hidden=\"true\" style=\"display: none;\">₹638</span></div><div class=\"price-facets\"><div class=\"rt-a7\" aria-label=\"Rated 3.1 out of 5\"><span style=\"display: inline-block; width: 90px; height: 10px; background: rgb(226, 232, 240); border-radius: 5px; vertical-align: middle;\"><span style=\"display: block; width: 62%; height: 100%; background: rgb(214, 158, 46); border-radius: 5px;\"></span></span> <small>32.5k ratings</small></div><div class=\"sr-a7\" title=\"Northwind Retail\"><small>Sold by <span>Nor</span>​<span>thwind Retail</span></small></div><div class=\"dl-a7\"><small>Get it by Wed, 23 Sept</small></div><div class=\"st-a7\"><span class=\"stock-badge out-stock\">Out of stock</span></div></div><div class=\"price-meta\"><span>Loaded in 1 attempt</span><button type=\"button\" class=\"btn btn-ghost btn-sm\">Refresh price</button></div></div>",
+    "blockText": "₹1,343\n₹994\n26% off\n 32.5k ratings\nSold by Nor​thwind Retail\nGet it by Wed, 23 Sept\nOUT OF STOCK\nLoaded in 1 attempt\nREFRESH PRICE",
+    "candidates": [
+      {
+        "tagName": "SPAN",
+        "className": "price-value",
+        "text": "₹1,198",
+        "visible": false,
+        "struckThrough": false,
+        "fontSize": "38.4px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "mr-a7",
+        "text": "₹1,343",
+        "visible": true,
+        "struckThrough": true,
+        "fontSize": "16px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "vzihf0u pv-a7",
+        "text": "₹994",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "38.4px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "bd-a7",
+        "text": "26% off",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "16px",
+        "color": "rgb(47, 133, 90)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "amount",
+        "text": "₹638",
+        "visible": false,
+        "struckThrough": false,
+        "fontSize": "16px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SMALL",
+        "className": "",
+        "text": "32.5k ratings",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "13.3333px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "",
+        "text": "Nor",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "13.3333px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "",
+        "text": "thwind Retail",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "13.3333px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SMALL",
+        "className": "",
+        "text": "Get it by Wed, 23 Sept",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "13.3333px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "stock-badge out-stock",
+        "text": "OUT OF STOCK",
+        "visible": true,
+        "struckThrough": true,
+        "fontSize": "10.56px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "",
+        "text": "Loaded in 1 attempt",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "12.16px",
+        "color": "rgb(118, 118, 118)"
+      },
+      {
+        "tagName": "BUTTON",
+        "className": "btn btn-ghost btn-sm",
+        "text": "REFRESH PRICE",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "11.52px",
+        "color": "rgb(17, 17, 17)"
+      }
+    ]
+  },
+  "notes": "Captured live from https://demo.inelabteamdev.com/product/206 on 2026-09-20T06:33:37.326Z"
+}

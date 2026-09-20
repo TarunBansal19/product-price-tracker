@@ -1,0 +1,270 @@
+{
+  "capturedAt": "2026-09-20T06:34:49.384Z",
+  "url": "https://demo.inelabteamdev.com/product/14",
+  "productId": "14",
+  "durationMs": 8692,
+  "rawProductJson": {
+    "id": 14,
+    "slug": "summit-creatorbook-pro",
+    "name": "Summit Creatorbook Pro",
+    "brand": "Summit",
+    "category": "Laptops",
+    "sku": "SUM-10014",
+    "description": "The Summit Creatorbook Pro. A dependable laptops pick with a clean, no-nonsense design and the everyday features you actually use.",
+    "specs": {
+      "warranty": "6 months manufacturer warranty",
+      "inTheBox": "Creatorbook, Recovery key card, Quick-start guide, Power cord",
+      "countryOfOrigin": "Malaysia",
+      "returns": "7-day replacement, unopened",
+      "support": "Phone support, 9am–6pm IST, weekdays only",
+      "weightGrams": 1145,
+      "material": "Anodised aluminium",
+      "colour": "Bone White",
+      "modelYear": 2023
+    },
+    "reviews": [
+      {
+        "id": "14-r3",
+        "author": "Imran S.",
+        "rating": 5,
+        "title": "Worth every rupee",
+        "body": "Replaced a five-year-old unit with this. Nothing has rattled loose or started creaking yet. Summit seem to have got this one right. Happy to recommend it.",
+        "date": "2025-06-21",
+        "verifiedPurchase": false,
+        "helpfulVotes": 79
+      },
+      {
+        "id": "14-r6",
+        "author": "Tanvi C.",
+        "rating": 5,
+        "title": "Worth every rupee",
+        "body": "Replaced a five-year-old unit with this. Nothing has rattled loose or started creaking yet. Summit seem to have got this one right. Would buy the same one again.",
+        "date": "2025-06-17",
+        "verifiedPurchase": false,
+        "helpfulVotes": 49
+      },
+      {
+        "id": "14-r2",
+        "author": "Rohan D.",
+        "rating": 5,
+        "title": "Worth every rupee",
+        "body": "Picked it up on a whim and it has earned its place. Build quality is genuinely good for the price. Summit seem to have got this one right. Would buy the same one again.",
+        "date": "2024-12-28",
+        "verifiedPurchase": false,
+        "helpfulVotes": 73
+      },
+      {
+        "id": "14-r1",
+        "author": "Rhea D.",
+        "rating": 5,
+        "title": "No complaints at all",
+        "body": "Picked it up on a whim and it has earned its place. Nothing has rattled loose or started creaking yet. Matches the listing description exactly. Happy to recommend it.",
+        "date": "2024-12-03",
+        "verifiedPurchase": true,
+        "helpfulVotes": 138
+      },
+      {
+        "id": "14-r5",
+        "author": "Gaurav R.",
+        "rating": 4,
+        "title": "Worth every rupee",
+        "body": "Replaced a five-year-old unit with this. Build quality is genuinely good for the price. Packaging was tidy and nothing was missing. No regrets.",
+        "date": "2024-11-27",
+        "verifiedPurchase": true,
+        "helpfulVotes": 174
+      },
+      {
+        "id": "14-r4",
+        "author": "Karthik G.",
+        "rating": 5,
+        "title": "Solid, boring, reliable",
+        "body": "Replaced a five-year-old unit with this. Setup took under ten minutes with no surprises. Second Summit product I own and both have lasted. Holding up well so far.",
+        "date": "2024-07-09",
+        "verifiedPurchase": true,
+        "helpfulVotes": 8
+      },
+      {
+        "id": "14-r7",
+        "author": "Meera R.",
+        "rating": 5,
+        "title": "No complaints at all",
+        "body": "Bought this after returning two other brands. Nothing has rattled loose or started creaking yet. Matches the listing description exactly. Holding up well so far.",
+        "date": "2024-05-14",
+        "verifiedPurchase": true,
+        "helpfulVotes": 188
+      }
+    ]
+  },
+  "rawPriceResponse": {
+    "productId": 14,
+    "v": 1,
+    "e": "cFpaDqXsGwirzJdp9bH1qUKflfh/IZW3Hze8tJDrH9ZpWhAfp/QNS7HHi2e68O2kUebiknEv2eEHOLq2keILzD1IEhSp6RwUsY+Zcay9+rJR3c/iaTfLoxY1p6PatxHOKS5LQuu5SF2zss4/9Pa7vF+NyKRxOc+5B3Spu4uvQZ17FE8Os/pIGqnNl2ngsfWvDg==",
+    "serverTime": 1789886088613
+  },
+  "rawLayoutJson": {
+    "revision": 627001,
+    "variant": 0,
+    "validUntil": 1789900902742,
+    "classes": {
+      "priceWrap": "pw-a7",
+      "priceValue": "pv-a7",
+      "mrp": "mr-a7",
+      "sale": "sl-a7",
+      "badge": "bd-a7",
+      "rating": "rt-a7",
+      "seller": "sr-a7",
+      "delivery": "dl-a7",
+      "stock": "st-a7"
+    },
+    "order": [
+      "rating",
+      "seller",
+      "delivery",
+      "stock"
+    ],
+    "priceTag": "span",
+    "priceCarrier": "text",
+    "ratingAria": true,
+    "sellerTitle": true
+  },
+  "authoritativeQuote": {
+    "p": 44081,
+    "m": 71098,
+    "n": 57590,
+    "b": 38,
+    "s": 0,
+    "c": "INR",
+    "t": 1789886088613,
+    "r": 4.5,
+    "rc": 40637,
+    "sl": "Vantage Outlet",
+    "dd": 4,
+    "v": "triple",
+    "g": 0,
+    "x": 1
+  },
+  "dom": {
+    "blockHtml": "<div class=\"price-block price-success pw-a7\" aria-live=\"polite\"><div class=\"price-main\"><span class=\"price-value\" aria-hidden=\"true\" style=\"display: none;\">₹38,124</span><span class=\"mr-a7\" style=\"text-decoration: line-through; opacity: 0.55; margin-right: 10px;\">₹71,098</span><span class=\"sl-a7\" style=\"opacity: 0.75; margin-right: 10px;\">Deal price ₹57,590</span><span class=\"vogscm5 pv-a7\" style=\"font-family: var(--serif); font-size: 2.4rem; font-weight: 700; letter-spacing: -0.02em; opacity: 1;\">₹44,081</span><span class=\"bd-a7\" style=\"margin-left: 10px; color: rgb(47, 133, 90); font-weight: 600;\">38% off</span><span class=\"amount\" data-price=\"true\" aria-hidden=\"true\" style=\"display: none;\">₹43,969</span></div><div class=\"price-facets\"><div class=\"rt-a7\" aria-label=\"Rated 4.5 out of 5\"><span style=\"display: inline-block; width: 90px; height: 10px; background: rgb(226, 232, 240); border-radius: 5px; vertical-align: middle;\"><span style=\"display: block; width: 90%; height: 100%; background: rgb(214, 158, 46); border-radius: 5px;\"></span></span> <small>40.6k ratings</small></div><div class=\"sr-a7\" title=\"Vantage Outlet\"><small>Sold by <span>Van</span>​<span>tage Outlet</span></small></div><div class=\"dl-a7\"><small>Get it by Thu, 24 Sept</small></div><div class=\"st-a7\"><span class=\"stock-badge out-stock\">Out of stock</span></div></div><div class=\"price-meta\"><span>Loaded in 2 attempts</span><button type=\"button\" class=\"btn btn-ghost btn-sm\">Refresh price</button></div></div>",
+    "blockText": "₹71,098\nDeal price ₹57,590\n₹44,081\n38% off\n 40.6k ratings\nSold by Van​tage Outlet\nGet it by Thu, 24 Sept\nOUT OF STOCK\nLoaded in 2 attempts\nREFRESH PRICE",
+    "candidates": [
+      {
+        "tagName": "SPAN",
+        "className": "price-value",
+        "text": "₹38,124",
+        "visible": false,
+        "struckThrough": false,
+        "fontSize": "38.4px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "mr-a7",
+        "text": "₹71,098",
+        "visible": true,
+        "struckThrough": true,
+        "fontSize": "16px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "sl-a7",
+        "text": "Deal price ₹57,590",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "16px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "vogscm5 pv-a7",
+        "text": "₹44,081",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "38.4px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "bd-a7",
+        "text": "38% off",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "16px",
+        "color": "rgb(47, 133, 90)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "amount",
+        "text": "₹43,969",
+        "visible": false,
+        "struckThrough": false,
+        "fontSize": "16px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SMALL",
+        "className": "",
+        "text": "40.6k ratings",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "13.3333px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "",
+        "text": "Van",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "13.3333px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "",
+        "text": "tage Outlet",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "13.3333px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SMALL",
+        "className": "",
+        "text": "Get it by Thu, 24 Sept",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "13.3333px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "stock-badge out-stock",
+        "text": "OUT OF STOCK",
+        "visible": true,
+        "struckThrough": true,
+        "fontSize": "10.56px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "",
+        "text": "Loaded in 2 attempts",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "12.16px",
+        "color": "rgb(118, 118, 118)"
+      },
+      {
+        "tagName": "BUTTON",
+        "className": "btn btn-ghost btn-sm",
+        "text": "REFRESH PRICE",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "11.52px",
+        "color": "rgb(17, 17, 17)"
+      }
+    ]
+  },
+  "notes": "Captured live from https://demo.inelabteamdev.com/product/14 on 2026-09-20T06:34:49.384Z"
+}

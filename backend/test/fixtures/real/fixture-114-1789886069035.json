@@ -1,0 +1,133 @@
+{
+  "capturedAt": "2026-09-20T06:34:29.035Z",
+  "url": "https://demo.inelabteamdev.com/product/114",
+  "productId": "114",
+  "durationMs": 8843,
+  "rawProductJson": {
+    "id": 114,
+    "slug": "vantablack-mouse-mini",
+    "name": "Vantablack Mouse Mini",
+    "brand": "Vantablack",
+    "category": "Peripherals",
+    "sku": "VAN-10114",
+    "description": "The Vantablack Mouse Mini. A dependable peripherals pick with a clean, no-nonsense design and the everyday features you actually use.",
+    "specs": {
+      "warranty": "2 years international warranty",
+      "inTheBox": "Mouse, USB-C to USB-A cable, Quick-start guide, Spare switches",
+      "countryOfOrigin": "Thailand",
+      "returns": "15-day replacement, unopened",
+      "support": "24×7 chat support",
+      "weightGrams": 707,
+      "material": "Glass-filled nylon",
+      "colour": "Slate Grey",
+      "modelYear": 2022
+    },
+    "reviews": [
+      {
+        "id": "114-r2",
+        "author": "Ishaan G.",
+        "rating": 5,
+        "title": "No complaints at all",
+        "body": "Replaced a five-year-old unit with this. Nothing has rattled loose or started creaking yet. Vantablack seem to have got this one right. Holding up well so far.",
+        "date": "2025-05-11",
+        "verifiedPurchase": false,
+        "helpfulVotes": 81
+      },
+      {
+        "id": "114-r5",
+        "author": "Farah J.",
+        "rating": 5,
+        "title": "Solid, boring, reliable",
+        "body": "Been using this daily for about three months now. Nothing has rattled loose or started creaking yet. Vantablack seem to have got this one right. Would buy the same one again.",
+        "date": "2025-05-04",
+        "verifiedPurchase": true,
+        "helpfulVotes": 93
+      },
+      {
+        "id": "114-r4",
+        "author": "Farah V.",
+        "rating": 4,
+        "title": "Solid, boring, reliable",
+        "body": "Been using this daily for about three months now. Nothing has rattled loose or started creaking yet. Second Vantablack product I own and both have lasted. Would buy the same one again.",
+        "date": "2023-12-21",
+        "verifiedPurchase": false,
+        "helpfulVotes": 109
+      },
+      {
+        "id": "114-r3",
+        "author": "Pooja G.",
+        "rating": 1,
+        "title": "Stopped working",
+        "body": "Arrived with a scratch on the casing. Support were polite but slow to respond. First Vantablack product that has let me down. Hoping the replacement is better.",
+        "date": "2023-11-27",
+        "verifiedPurchase": true,
+        "helpfulVotes": 23
+      },
+      {
+        "id": "114-r1",
+        "author": "Aditi D.",
+        "rating": 3,
+        "title": "Good, with caveats",
+        "body": "Took a while to get used to this one. The finish scuffs more easily than I would like. Close enough to the listing description. Good value, not a standout.",
+        "date": "2023-10-17",
+        "verifiedPurchase": true,
+        "helpfulVotes": 32
+      }
+    ]
+  },
+  "rawPriceResponse": {
+    "error": "upstream_error"
+  },
+  "rawLayoutJson": {
+    "revision": 627001,
+    "variant": 0,
+    "validUntil": 1789900902742,
+    "classes": {
+      "priceWrap": "pw-a7",
+      "priceValue": "pv-a7",
+      "mrp": "mr-a7",
+      "sale": "sl-a7",
+      "badge": "bd-a7",
+      "rating": "rt-a7",
+      "seller": "sr-a7",
+      "delivery": "dl-a7",
+      "stock": "st-a7"
+    },
+    "order": [
+      "rating",
+      "seller",
+      "delivery",
+      "stock"
+    ],
+    "priceTag": "span",
+    "priceCarrier": "text",
+    "ratingAria": true,
+    "sellerTitle": true
+  },
+  "authoritativeQuote": null,
+  "dom": {
+    "blockHtml": "<div class=\"price-block pw-a7\" aria-live=\"polite\" aria-busy=\"true\"><div class=\"spinner\" aria-hidden=\"true\"></div><div><p class=\"price-status\">Retrying (attempt 3/6)…</p><p class=\"price-substatus\">Store responded with “upstream 503”.</p></div></div>",
+    "blockText": "Retrying (attempt 3/6)…\n\nStore responded with “upstream 503”.",
+    "candidates": [
+      {
+        "tagName": "P",
+        "className": "price-status",
+        "text": "Retrying (attempt 3/6)…",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "14.72px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "P",
+        "className": "price-substatus",
+        "text": "Store responded with “upstream 503”.",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "12.8px",
+        "color": "rgb(118, 118, 118)"
+      }
+    ]
+  },
+  "notes": "Captured live from https://demo.inelabteamdev.com/product/114 on 2026-09-20T06:34:29.035Z"
+}

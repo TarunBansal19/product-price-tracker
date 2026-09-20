@@ -1,0 +1,240 @@
+{
+  "capturedAt": "2026-09-20T06:33:28.526Z",
+  "url": "https://demo.inelabteamdev.com/product/86",
+  "productId": "86",
+  "durationMs": 9156,
+  "rawProductJson": {
+    "id": 86,
+    "slug": "vantablack-turntable-mini",
+    "name": "Vantablack Turntable Mini",
+    "brand": "Vantablack",
+    "category": "Audio",
+    "sku": "VAN-10086",
+    "description": "The Vantablack Turntable Mini. A dependable audio pick with a clean, no-nonsense design and the everyday features you actually use.",
+    "specs": {
+      "warranty": "2 years international warranty",
+      "inTheBox": "Turntable, 3.5mm aux cable, Cable clip",
+      "countryOfOrigin": "Portugal",
+      "returns": "30-day return, original packaging",
+      "support": "In-app chat, 8am–8pm IST",
+      "weightGrams": 660,
+      "material": "Recycled aluminium",
+      "colour": "Matte Black",
+      "modelYear": 2022
+    },
+    "reviews": [
+      {
+        "id": "86-r4",
+        "author": "Priya S.",
+        "rating": 3,
+        "title": "Mostly happy",
+        "body": "It is fine, but I expected slightly more. It works, though the instructions are close to useless. About what I expected at this price. Would consider other options next time.",
+        "date": "2025-06-01",
+        "verifiedPurchase": true,
+        "helpfulVotes": 103
+      },
+      {
+        "id": "86-r2",
+        "author": "Yusuf N.",
+        "rating": 3,
+        "title": "Mostly happy",
+        "body": "It is fine, but I expected slightly more. It works, though the instructions are close to useless. Vantablack have made better, but this is serviceable. Still, I am keeping it.",
+        "date": "2025-02-16",
+        "verifiedPurchase": true,
+        "helpfulVotes": 75
+      },
+      {
+        "id": "86-r3",
+        "author": "Pooja C.",
+        "rating": 4,
+        "title": "Exactly what I wanted",
+        "body": "Picked it up on a whim and it has earned its place. Nothing has rattled loose or started creaking yet. Vantablack seem to have got this one right. Holding up well so far.",
+        "date": "2024-12-17",
+        "verifiedPurchase": true,
+        "helpfulVotes": 176
+      },
+      {
+        "id": "86-r1",
+        "author": "Farah P.",
+        "rating": 2,
+        "title": "Disappointed",
+        "body": "Arrived with a scratch on the casing. Documentation is thin and the app is worse. Expected more from Vantablack. Returned it within the window.",
+        "date": "2024-12-05",
+        "verifiedPurchase": true,
+        "helpfulVotes": 33
+      }
+    ]
+  },
+  "rawPriceResponse": {
+    "productId": 86,
+    "v": 1,
+    "e": "FfRyJSFwtCXVN1hszFYT6iKuzfm74/XCTLon3phznmUM9Dg0L22iYsA6RX6RWAu7Ma3chdmTucxU/z3WmXKKflbuNDcrdLgm1yxWPINOHfYqu9y+9OOh0U68LtmEZ8ErTOwgRmgp52ONdhFu5RFZt2e10u7zpbnaQac9mop/kDMcv3JrfmOsM4UiTn6NVlH6KaaD",
+    "serverTime": 1789886005875
+  },
+  "rawLayoutJson": {
+    "revision": 627001,
+    "variant": 0,
+    "validUntil": 1789900902742,
+    "classes": {
+      "priceWrap": "pw-a7",
+      "priceValue": "pv-a7",
+      "mrp": "mr-a7",
+      "sale": "sl-a7",
+      "badge": "bd-a7",
+      "rating": "rt-a7",
+      "seller": "sr-a7",
+      "delivery": "dl-a7",
+      "stock": "st-a7"
+    },
+    "order": [
+      "rating",
+      "seller",
+      "delivery",
+      "stock"
+    ],
+    "priceTag": "span",
+    "priceCarrier": "text",
+    "ratingAria": true,
+    "sellerTitle": true
+  },
+  "authoritativeQuote": {
+    "p": 14477,
+    "m": 21935,
+    "n": 18206,
+    "b": 34,
+    "s": 100,
+    "c": "INR",
+    "t": 1789886005875,
+    "r": 4.9,
+    "rc": 18715,
+    "sl": "Ashgrove Depot",
+    "dd": 7,
+    "v": "triple",
+    "g": 0,
+    "x": 1
+  },
+  "dom": {
+    "blockHtml": "<div class=\"price-block price-success pw-a7\" aria-live=\"polite\"><div class=\"price-main\"><span class=\"price-value\" aria-hidden=\"true\" style=\"display: none;\">₹11,425</span><span class=\"mr-a7\" style=\"text-decoration: line-through; opacity: 0.55; margin-right: 10px;\">₹21,935</span><span class=\"sl-a7\" style=\"opacity: 0.75; margin-right: 10px;\">Deal price ₹18,206</span><span class=\"vobild6 pv-a7\" style=\"font-family: var(--serif); font-size: 2.4rem; font-weight: 700; letter-spacing: -0.02em; opacity: 1;\">₹14,477</span><span class=\"bd-a7\" style=\"margin-left: 10px; color: rgb(47, 133, 90); font-weight: 600;\">34% off</span><span class=\"amount\" data-price=\"true\" aria-hidden=\"true\" style=\"display: none;\">₹13,349</span></div><div class=\"price-facets\"><div class=\"rt-a7\" aria-label=\"Rated 4.9 out of 5\"><span style=\"display: inline-block; width: 90px; height: 10px; background: rgb(226, 232, 240); border-radius: 5px; vertical-align: middle;\"><span style=\"display: block; width: 98%; height: 100%; background: rgb(214, 158, 46); border-radius: 5px;\"></span></span> <small>18.7k ratings</small></div><div class=\"sr-a7\" title=\"Ashgrove Depot\"><small>Sold by <span>Ash</span>​<span>grove Depot</span></small></div><div class=\"dl-a7\"><small>Get it by Sun, 27 Sept</small></div><div class=\"st-a7\"><span class=\"stock-badge in-stock\">In stock · 100 left</span></div></div><div class=\"price-meta\"><span>Loaded in 1 attempt</span><button type=\"button\" class=\"btn btn-ghost btn-sm\">Refresh price</button></div></div>",
+    "blockText": "₹21,935\nDeal price ₹18,206\n₹14,477\n34% off\n 18.7k ratings\nSold by Ash​grove Depot\nGet it by Sun, 27 Sept\nIN STOCK · 100 LEFT\nLoaded in 1 attempt\nREFRESH PRICE",
+    "candidates": [
+      {
+        "tagName": "SPAN",
+        "className": "price-value",
+        "text": "₹11,425",
+        "visible": false,
+        "struckThrough": false,
+        "fontSize": "38.4px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "mr-a7",
+        "text": "₹21,935",
+        "visible": true,
+        "struckThrough": true,
+        "fontSize": "16px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "sl-a7",
+        "text": "Deal price ₹18,206",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "16px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "vobild6 pv-a7",
+        "text": "₹14,477",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "38.4px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "bd-a7",
+        "text": "34% off",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "16px",
+        "color": "rgb(47, 133, 90)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "amount",
+        "text": "₹13,349",
+        "visible": false,
+        "struckThrough": false,
+        "fontSize": "16px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SMALL",
+        "className": "",
+        "text": "18.7k ratings",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "13.3333px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "",
+        "text": "Ash",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "13.3333px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "",
+        "text": "grove Depot",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "13.3333px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SMALL",
+        "className": "",
+        "text": "Get it by Sun, 27 Sept",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "13.3333px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "stock-badge in-stock",
+        "text": "IN STOCK · 100 LEFT",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "10.56px",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "",
+        "text": "Loaded in 1 attempt",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "12.16px",
+        "color": "rgb(118, 118, 118)"
+      },
+      {
+        "tagName": "BUTTON",
+        "className": "btn btn-ghost btn-sm",
+        "text": "REFRESH PRICE",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "11.52px",
+        "color": "rgb(17, 17, 17)"
+      }
+    ]
+  },
+  "notes": "Captured live from https://demo.inelabteamdev.com/product/86 on 2026-09-20T06:33:28.526Z"
+}

@@ -1,0 +1,229 @@
+{
+  "capturedAt": "2026-09-20T06:33:45.508Z",
+  "url": "https://demo.inelabteamdev.com/product/776",
+  "productId": "776",
+  "durationMs": 7081,
+  "rawProductJson": {
+    "id": 776,
+    "slug": "meridian-bridge-hub-x",
+    "name": "Meridian Bridge Hub X",
+    "brand": "Meridian",
+    "category": "Smart Home",
+    "sku": "MER-10776",
+    "description": "The Meridian Bridge Hub X. A dependable smart home pick with a clean, no-nonsense design and the everyday features you actually use.",
+    "specs": {
+      "warranty": "18 months manufacturer warranty",
+      "inTheBox": "Bridge Hub, Mounting plate, Adhesive pad, Wiring adapter, Screws and wall plugs",
+      "countryOfOrigin": "Germany",
+      "returns": "10-day replacement, original packaging",
+      "support": "In-app chat, 8am–8pm IST",
+      "weightGrams": 461,
+      "material": "ABS with soft-touch coating",
+      "colour": "Bone White",
+      "modelYear": 2023
+    },
+    "reviews": [
+      {
+        "id": "776-r2",
+        "author": "Farah K.",
+        "rating": 3,
+        "title": "Good, with caveats",
+        "body": "Took a while to get used to this one. Performance is fine, the packaging was a mess. Packaging was fine, the manual less so. Fine for casual use.",
+        "date": "2025-06-24",
+        "verifiedPurchase": true,
+        "helpfulVotes": 68
+      },
+      {
+        "id": "776-r3",
+        "author": "Lakshmi M.",
+        "rating": 5,
+        "title": "Exactly what I wanted",
+        "body": "Picked it up on a whim and it has earned its place. Setup took under ten minutes with no surprises. Matches the listing description exactly. Holding up well so far.",
+        "date": "2024-06-29",
+        "verifiedPurchase": true,
+        "helpfulVotes": 27
+      },
+      {
+        "id": "776-r1",
+        "author": "Pooja J.",
+        "rating": 5,
+        "title": "Worth every rupee",
+        "body": "Bought this after returning two other brands. Build quality is genuinely good for the price. Meridian seem to have got this one right. Holding up well so far.",
+        "date": "2024-03-15",
+        "verifiedPurchase": true,
+        "helpfulVotes": 235
+      }
+    ]
+  },
+  "rawPriceResponse": {
+    "productId": 776,
+    "v": 1,
+    "e": "6uZbReVHyF0urPfP2KPZ2IuzLNPXvPYB1gVC0LiUhR2g6AkE/UTbLFXS947Y7czbjLA4yI2m+gDdG1eQqoKWWbP+GEnpUtsXeKLvkc2q382f9GzTj7yaUYFdAcT/jvte5ahOE/1S2wF/ou+T1ruYw4elc4XU8qkSwwsHgaCfmAnp5hFXog==",
+    "serverTime": 1789886022730
+  },
+  "rawLayoutJson": {
+    "revision": 627001,
+    "variant": 0,
+    "validUntil": 1789900902742,
+    "classes": {
+      "priceWrap": "pw-a7",
+      "priceValue": "pv-a7",
+      "mrp": "mr-a7",
+      "sale": "sl-a7",
+      "badge": "bd-a7",
+      "rating": "rt-a7",
+      "seller": "sr-a7",
+      "delivery": "dl-a7",
+      "stock": "st-a7"
+    },
+    "order": [
+      "rating",
+      "seller",
+      "delivery",
+      "stock"
+    ],
+    "priceTag": "span",
+    "priceCarrier": "text",
+    "ratingAria": true,
+    "sellerTitle": true
+  },
+  "authoritativeQuote": {
+    "p": 9185,
+    "m": 7964,
+    "b": 19,
+    "s": 161,
+    "c": "INR",
+    "t": 1789886022730,
+    "r": 3.6,
+    "rc": 3731,
+    "sl": "Vantage Outlet",
+    "dd": 1,
+    "v": "stale",
+    "g": 1,
+    "x": 0
+  },
+  "dom": {
+    "blockHtml": "<div class=\"price-block price-success pw-a7\" aria-live=\"polite\"><div class=\"price-main\"><span class=\"price-value\" aria-hidden=\"true\" style=\"display: none;\">₹7,075</span><span class=\"mr-a7\" style=\"text-decoration: line-through; opacity: 0.55; margin-right: 10px;\">₹7,964</span><span class=\"vp9kvz3 pv-a7\" style=\"font-family: var(--serif); font-size: 2.4rem; font-weight: 700; letter-spacing: -0.02em; opacity: 0.45;\">₹9,185</span><span class=\"bd-a7\" style=\"margin-left: 10px; color: rgb(47, 133, 90); font-weight: 600;\">19% off</span><span style=\"margin-left: 10px; font-size: 0.8rem; opacity: 0.7;\">Updating…</span><span class=\"amount\" data-price=\"true\" aria-hidden=\"true\" style=\"display: none;\">₹8,298</span></div><div class=\"price-facets\"><div class=\"rt-a7\" aria-label=\"Rated 3.6 out of 5\"><span style=\"display: inline-block; width: 90px; height: 10px; background: rgb(226, 232, 240); border-radius: 5px; vertical-align: middle;\"><span style=\"display: block; width: 72%; height: 100%; background: rgb(214, 158, 46); border-radius: 5px;\"></span></span> <small>3.7k ratings</small></div><div class=\"sr-a7\" title=\"Vantage Outlet\"><small>Sold by <span>Van</span>​<span>tage Outlet</span></small></div><div class=\"dl-a7\"><small>Get it by Mon, 21 Sept</small></div><div class=\"st-a7\"><span class=\"stock-badge in-stock\">Only 161 left</span></div></div><div class=\"price-meta\"><span>Loaded in 1 attempt</span><button type=\"button\" class=\"btn btn-ghost btn-sm\">Refresh price</button></div></div>",
+    "blockText": "₹7,964\n₹9,185\n19% off\nUpdating…\n 3.7k ratings\nSold by Van​tage Outlet\nGet it by Mon, 21 Sept\nONLY 161 LEFT\nLoaded in 1 attempt\nREFRESH PRICE",
+    "candidates": [
+      {
+        "tagName": "SPAN",
+        "className": "price-value",
+        "text": "₹7,075",
+        "visible": false,
+        "struckThrough": false,
+        "fontSize": "38.4px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "mr-a7",
+        "text": "₹7,964",
+        "visible": true,
+        "struckThrough": true,
+        "fontSize": "16px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "vp9kvz3 pv-a7",
+        "text": "₹9,185",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "38.4px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "bd-a7",
+        "text": "19% off",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "16px",
+        "color": "rgb(47, 133, 90)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "",
+        "text": "Updating…",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "12.8px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "amount",
+        "text": "₹8,298",
+        "visible": false,
+        "struckThrough": false,
+        "fontSize": "16px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SMALL",
+        "className": "",
+        "text": "3.7k ratings",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "13.3333px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "",
+        "text": "Van",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "13.3333px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "",
+        "text": "tage Outlet",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "13.3333px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SMALL",
+        "className": "",
+        "text": "Get it by Mon, 21 Sept",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "13.3333px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "stock-badge in-stock",
+        "text": "ONLY 161 LEFT",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "10.56px",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "tagName": "SPAN",
+        "className": "",
+        "text": "Loaded in 1 attempt",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "12.16px",
+        "color": "rgb(118, 118, 118)"
+      },
+      {
+        "tagName": "BUTTON",
+        "className": "btn btn-ghost btn-sm",
+        "text": "REFRESH PRICE",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "11.52px",
+        "color": "rgb(17, 17, 17)"
+      }
+    ]
+  },
+  "notes": "Captured live from https://demo.inelabteamdev.com/product/776 on 2026-09-20T06:33:45.508Z"
+}

@@ -1,0 +1,160 @@
+{
+  "capturedAt": "2026-09-20T06:32:37.943Z",
+  "url": "https://demo.inelabteamdev.com/product/200",
+  "productId": "200",
+  "durationMs": 21565,
+  "rawProductJson": {
+    "id": 200,
+    "slug": "helix-docking-station-air",
+    "name": "Helix Docking Station Air",
+    "brand": "Helix",
+    "category": "Peripherals",
+    "sku": "HEL-10200",
+    "description": "The Helix Docking Station Air. A dependable peripherals pick with a clean, no-nonsense design and the everyday features you actually use.",
+    "specs": {
+      "warranty": "2 years manufacturer warranty",
+      "inTheBox": "Docking Station, Carry sleeve, USB-C to USB-A cable, Spare switches, Wireless receiver",
+      "countryOfOrigin": "Indonesia",
+      "returns": "10-day replacement, original packaging",
+      "support": "24×7 chat support",
+      "weightGrams": 704,
+      "material": "Recycled polycarbonate",
+      "colour": "Bone White",
+      "modelYear": 2022
+    },
+    "reviews": [
+      {
+        "id": "200-r7",
+        "author": "Farah R.",
+        "rating": 4,
+        "title": "Would buy again",
+        "body": "Picked it up on a whim and it has earned its place. Build quality is genuinely good for the price. Helix seem to have got this one right. Happy to recommend it.",
+        "date": "2025-05-27",
+        "verifiedPurchase": true,
+        "helpfulVotes": 190
+      },
+      {
+        "id": "200-r2",
+        "author": "Lakshmi N.",
+        "rating": 5,
+        "title": "Exactly what I wanted",
+        "body": "Bought this after returning two other brands. Build quality is genuinely good for the price. Matches the listing description exactly. Happy to recommend it.",
+        "date": "2025-03-27",
+        "verifiedPurchase": true,
+        "helpfulVotes": 54
+      },
+      {
+        "id": "200-r1",
+        "author": "Karthik H.",
+        "rating": 1,
+        "title": "Expected better",
+        "body": "Stopped working properly in the third week. It rattles when handled, which does not inspire confidence. Expected more from Helix. Going with a different brand.",
+        "date": "2025-02-14",
+        "verifiedPurchase": false,
+        "helpfulVotes": 127
+      },
+      {
+        "id": "200-r4",
+        "author": "Karthik H.",
+        "rating": 5,
+        "title": "Solid, boring, reliable",
+        "body": "Picked it up on a whim and it has earned its place. Setup took under ten minutes with no surprises. Second Helix product I own and both have lasted. Holding up well so far.",
+        "date": "2025-01-04",
+        "verifiedPurchase": true,
+        "helpfulVotes": 228
+      },
+      {
+        "id": "200-r6",
+        "author": "Aditi S.",
+        "rating": 5,
+        "title": "No complaints at all",
+        "body": "Bought this after returning two other brands. It does the one job it advertises and does it well. Matches the listing description exactly. Would buy the same one again.",
+        "date": "2024-09-17",
+        "verifiedPurchase": true,
+        "helpfulVotes": 177
+      },
+      {
+        "id": "200-r5",
+        "author": "Devansh N.",
+        "rating": 5,
+        "title": "Would buy again",
+        "body": "Picked it up on a whim and it has earned its place. Setup took under ten minutes with no surprises. Helix seem to have got this one right. No regrets.",
+        "date": "2024-06-19",
+        "verifiedPurchase": true,
+        "helpfulVotes": 45
+      },
+      {
+        "id": "200-r3",
+        "author": "Sana S.",
+        "rating": 5,
+        "title": "Exactly what I wanted",
+        "body": "Replaced a five-year-old unit with this. Build quality is genuinely good for the price. Matches the listing description exactly. Would buy the same one again.",
+        "date": "2023-11-28",
+        "verifiedPurchase": true,
+        "helpfulVotes": 53
+      }
+    ]
+  },
+  "rawPriceResponse": null,
+  "rawLayoutJson": {
+    "revision": 627001,
+    "variant": 0,
+    "validUntil": 1789900902742,
+    "classes": {
+      "priceWrap": "pw-a7",
+      "priceValue": "pv-a7",
+      "mrp": "mr-a7",
+      "sale": "sl-a7",
+      "badge": "bd-a7",
+      "rating": "rt-a7",
+      "seller": "sr-a7",
+      "delivery": "dl-a7",
+      "stock": "st-a7"
+    },
+    "order": [
+      "rating",
+      "seller",
+      "delivery",
+      "stock"
+    ],
+    "priceTag": "span",
+    "priceCarrier": "text",
+    "ratingAria": true,
+    "sellerTitle": true
+  },
+  "authoritativeQuote": null,
+  "dom": {
+    "blockHtml": "<div class=\"price-block price-idle pw-a7\"><div><p class=\"price-status\">Price hidden</p><p class=\"price-substatus\">Check the current price and availability.</p></div><button type=\"button\" class=\"btn btn-primary\" aria-label=\"Reveal price\">Reveal price</button></div>",
+    "blockText": "Price hidden\n\nCheck the current price and availability.\n\nREVEAL PRICE",
+    "candidates": [
+      {
+        "tagName": "P",
+        "className": "price-status",
+        "text": "Price hidden",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "14.72px",
+        "color": "rgb(17, 17, 17)"
+      },
+      {
+        "tagName": "P",
+        "className": "price-substatus",
+        "text": "Check the current price and availability.",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "12.8px",
+        "color": "rgb(118, 118, 118)"
+      },
+      {
+        "tagName": "BUTTON",
+        "className": "btn btn-primary",
+        "text": "REVEAL PRICE",
+        "visible": true,
+        "struckThrough": false,
+        "fontSize": "11.52px",
+        "color": "rgb(255, 255, 255)"
+      }
+    ]
+  },
+  "notes": "Captured live from https://demo.inelabteamdev.com/product/200 on 2026-09-20T06:32:37.943Z"
+}
