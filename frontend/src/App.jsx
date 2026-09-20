@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { BackendStatus } from './components/BackendStatus.jsx';
 import { SearchAutocomplete } from './components/SearchAutocomplete.jsx';
 import { TrackedRow } from './components/TrackedRow.jsx';
@@ -14,6 +14,9 @@ export function App() {
   const [selectedProductId, setSelectedProductId] = useState(null);
   const maxSlots = 15; // MAX_TRACKED from backend
 
+  // Guard: block background fetches from overwriting optimistic updates
+  const suppressFetchUntilRef = useRef(0);
+
   useEffect(() => {
     const unsub = subscribeWakeup((isWaking, msg) => {
       setWakingUp(isWaking);
@@ -22,9 +25,15 @@ export function App() {
     return unsub;
   }, []);
 
-  const fetchTrackedProducts = useCallback(async () => {
+  const fetchTrackedProducts = useCallback(async ({ force = false } = {}) => {
+    // Skip if an optimistic mutation is in-flight (unless forced)
+    if (!force && Date.now() < suppressFetchUntilRef.current) {
+      return;
+    }
     try {
       const data = await api.getTrackedProducts();
+      // Double-check we're not in a suppression window when the response arrives
+      if (Date.now() < suppressFetchUntilRef.current) return;
       setTrackedProducts(data.products || []);
     } catch (err) {
       console.error('Failed to load tracked products:', err);
@@ -32,17 +41,37 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    fetchTrackedProducts();
+    fetchTrackedProducts({ force: true });
     const interval = setInterval(() => {
       fetchTrackedProducts();
     }, 15000);
     return () => clearInterval(interval);
   }, [fetchTrackedProducts]);
 
+  // ---- TRACK a new product ----
   const handleProductTracked = async (newProduct) => {
-    await fetchTrackedProducts();
-    if (newProduct && (newProduct.id || newProduct.store_product_id)) {
+    if (newProduct) {
+      // Optimistically add the product to the sidebar immediately
+      setTrackedProducts((prev) => {
+        const alreadyExists = prev.some(
+          (p) => p.id === newProduct.id || String(p.store_product_id) === String(newProduct.store_product_id)
+        );
+        if (alreadyExists) return prev;
+        return [newProduct, ...prev];
+      });
       setSelectedProductId(newProduct.id || newProduct.store_product_id);
+    }
+    // Fetch enriched data from backend after a short delay (let initial scrape begin)
+    suppressFetchUntilRef.current = Date.now() + 1500;
+    await new Promise((r) => setTimeout(r, 1500));
+    await fetchTrackedProducts({ force: true });
+    // Re-select in case the id changed after enrichment
+    if (newProduct) {
+      setSelectedProductId((prev) => {
+        // If already set, keep it
+        if (prev) return prev;
+        return newProduct.id || newProduct.store_product_id;
+      });
     }
   };
 
@@ -50,13 +79,21 @@ export function App() {
     // Optionally refresh tracked count if health updates
   };
 
+  // ---- UNTRACK a product ----
   const handleUntrack = (untrackedId) => {
     const idToMatch = String(untrackedId || selectedProductId);
+    // Suppress background fetches for 3 seconds so they can't overwrite
+    suppressFetchUntilRef.current = Date.now() + 3000;
+    // Optimistic removal from sidebar
     setTrackedProducts((prev) =>
       prev.filter((p) => p.id !== idToMatch && String(p.store_product_id) !== idToMatch)
     );
     setSelectedProductId(null);
-    fetchTrackedProducts();
+    // Confirm from backend after suppression window
+    setTimeout(async () => {
+      suppressFetchUntilRef.current = 0;
+      await fetchTrackedProducts({ force: true });
+    }, 2000);
   };
 
   const trackedStoreIds = new Set(
@@ -168,7 +205,7 @@ export function App() {
         ) : (
           <ProductDetail
             product={selectedProduct}
-            onProductUpdated={fetchTrackedProducts}
+            onProductUpdated={() => fetchTrackedProducts({ force: true })}
             onUntrack={handleUntrack}
           />
         )}
