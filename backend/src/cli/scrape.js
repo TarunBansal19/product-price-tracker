@@ -63,8 +63,37 @@ async function main() {
   try {
     for (const id of productIds) {
       console.log(`\n>>> Processing Product ${id}...`);
+      let productToScrape = { id, store_product_id: String(id) };
+
+      if (shouldPersist && isDbConfigured()) {
+        try {
+          let tracked = await repo.getTrackedProductByStoreId(String(id));
+          if (!tracked) {
+            let name = `Product ${id}`;
+            let category = null;
+            try {
+              const { items } = await repo.searchCatalog({ query: '', limit: 100 });
+              const found = items.find(it => String(it.store_product_id) === String(id));
+              if (found) {
+                name = found.name;
+                category = found.category;
+              }
+            } catch {}
+            tracked = await repo.trackProduct({
+              storeProductId: String(id),
+              name,
+              category
+            });
+            console.log(`[DB] Auto-tracked product ${id} (UUID: ${tracked.id})`);
+          }
+          productToScrape = tracked;
+        } catch (trackErr) {
+          console.warn(`[DB] Could not resolve tracked product: ${trackErr.message}`);
+        }
+      }
+
       const res = await executeProductJob({
-        product: { id, store_product_id: id },
+        product: productToScrape,
         runId,
         browser,
         persist: shouldPersist,
