@@ -65,9 +65,22 @@ export const repo = {
   },
 
   async finishAttemptSuccess({ attemptId, observation }) {
+    const payload = {
+      observed_at: observation.observed_at || observation.observedAt,
+      price_minor: observation.price_minor || (observation.priceMinor !== undefined ? String(observation.priceMinor) : null),
+      currency: observation.currency,
+      stock_state: observation.stock_state || observation.stockState,
+      stock_quantity: observation.stock_quantity !== undefined ? observation.stock_quantity : (observation.stockQuantity ?? null),
+      list_price_minor: observation.list_price_minor || (observation.listPriceMinor !== undefined ? String(observation.listPriceMinor) : null),
+      raw_price_text: observation.raw_price_text || observation.rawPriceText,
+      raw_stock_text: observation.raw_stock_text || observation.rawStockText,
+      price_source: observation.price_source || observation.priceSource,
+      cross_checked: observation.cross_checked !== undefined ? observation.cross_checked : (observation.crossChecked ?? false)
+    };
+
     return callRpc('finish_attempt_success', {
       p_attempt_id: attemptId,
-      p_observation: observation
+      p_observation: payload
     });
   },
 

@@ -22,8 +22,11 @@ export function pickPrice({ authoritativeQuote = null, domCandidates = [], block
     // Reject discount percentage badges (e.g. "19% off")
     if (/\d+%\s*off/i.test(text) || /discount/i.test(text)) continue;
 
-    // Check if it looks like a price (has currency or digits with currency-like context)
-    if (/^(₹|Rs\.?|\$|€)/i.test(text) || (/\d/.test(text) && !/left|stock|rating|reviews|warranty/i.test(text))) {
+    // Check if it looks like a price (has currency or multi-digit context)
+    const hasCurrency = /(₹|Rs\.?|\$|€)/i.test(text);
+    if (!hasCurrency && text.length <= 3) continue;
+
+    if (hasCurrency || (/\d{2,}/.test(text) && !/left|stock|rating|reviews|warranty/i.test(text))) {
       try {
         const parsed = parsePrice(text);
         viableDomPrices.push({
@@ -85,7 +88,24 @@ export function pickPrice({ authoritativeQuote = null, domCandidates = [], block
     if (matchingDom) {
       crossChecked = true;
       rawPriceText = matchingDom.rawText;
-    } else if (viableDomPrices.length > 0) {
+    } else {
+      // Cross-check with lines in blockText
+      const lines = (blockText || '').split('\n').map(l => l.trim()).filter(Boolean);
+      for (const line of lines) {
+        if (/(₹|Rs\.?|\$|€)/i.test(line)) {
+          try {
+            const parsed = parsePrice(line);
+            if (parsed.priceMinor === selectedPriceMinor) {
+              crossChecked = true;
+              rawPriceText = line;
+              break;
+            }
+          } catch {}
+        }
+      }
+    }
+
+    if (!crossChecked && viableDomPrices.length > 0) {
       // DOM price is present but does not match authoritative quote
       // Log for review; if DOM candidates disagree among themselves, flag ambiguity
       const distinctDomValues = new Set(viableDomPrices.map(vp => String(vp.parsed.priceMinor)));

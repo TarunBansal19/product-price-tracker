@@ -5,7 +5,7 @@
  */
 
 import { buildProductUrl } from './urls.js';
-import { createAttemptContext, closeAttemptContext } from './browserPool.js';
+import { createAttemptContext, closeAttemptContext, getStoreTimeOffset } from './browserPool.js';
 import { pickPrice } from './extract/index.js';
 import { validationGates } from './validate.js';
 import { ScrapeError, ERROR_CODES } from './errors.js';
@@ -146,17 +146,18 @@ export async function scrapeProductPrice({
           await page.waitForFunction(
             () => {
               const quotes = window.__quotes;
-              if (quotes && quotes.length > 0) return true;
               const block = document.querySelector('.price-block');
-              if (block && !block.getAttribute('aria-busy') && !block.querySelector('.spinner')) {
-                const text = block.innerText || '';
-                return /₹|Rs|\$|€/.test(text) && !/loading|checking/i.test(text);
-              }
-              return false;
+              if (!block) return false;
+              const isBusy = block.getAttribute('aria-busy') === 'true' || Boolean(block.querySelector('.spinner'));
+              const text = block.innerText || '';
+              if (isBusy || /loading|checking|updating|price hidden/i.test(text)) return false;
+              if (quotes && quotes.length > 0) return true;
+              return /₹|Rs|\$|€/.test(text);
             },
             null,
             { timeout: 15000 }
           );
+          await page.waitForTimeout(350);
         } catch (waitErr) {
           // Determine if error state is displayed in UI
           const isErrorState = await page.$('.price-error, [class*="error"]').catch(() => null);
@@ -184,12 +185,18 @@ export async function scrapeProductPrice({
           const candidates = [];
 
           for (const el of block.querySelectorAll('*')) {
-            const text = (el.innerText || '').trim();
             const style = window.getComputedStyle(el);
             const isVisible = style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== '0';
             const isStruck = style.textDecoration.includes('line-through');
+            const text = (el.innerText || '').trim();
 
-            if (text.length > 0 && text.length < 120 && el.children.length === 0) {
+            if (!isVisible || !text || text.length > 120) continue;
+
+            const hasCurrency = /(₹|Rs\.?|\$|€)/i.test(text);
+            const isLeaf = el.children.length === 0;
+            const isPriceContainer = hasCurrency && Array.from(el.children).every(c => ['SPAN', 'B', 'STRONG', 'I', 'EM'].includes(c.tagName));
+
+            if (isLeaf || isPriceContainer) {
               candidates.push({
                 tagName: el.tagName,
                 className: el.className,
@@ -238,7 +245,8 @@ export async function scrapeProductPrice({
 
         // V9: Freshness
         if (authoritativeQuote?.t) {
-          validationGates.checkV9Freshness({ quoteTimestamp: authoritativeQuote.t });
+          const timeOffset = await getStoreTimeOffset();
+          validationGates.checkV9Freshness({ quoteTimestamp: authoritativeQuote.t, timeOffset });
         }
 
         const observedAt = authoritativeQuote?.t

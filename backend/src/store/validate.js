@@ -178,11 +178,12 @@ export const validationGates = {
   /**
    * V9: Freshness / token expiry check.
    */
-  checkV9Freshness({ quoteTimestamp, maxAgeMs = 120000 }) {
+  checkV9Freshness({ quoteTimestamp, timeOffset = 0, maxAgeMs = 120000 }) {
     if (!quoteTimestamp) return;
 
-    const age = Date.now() - Number(quoteTimestamp);
-    if (age > maxAgeMs) {
+    const adjustedNow = Date.now() + timeOffset;
+    const age = adjustedNow - Number(quoteTimestamp);
+    if (Math.abs(age) > maxAgeMs) {
       throw new ScrapeError(ERROR_CODES.TOKEN_EXPIRED, `Quote timestamp is stale (${(age / 1000).toFixed(1)}s old)`, {
         ageMs: age
       });

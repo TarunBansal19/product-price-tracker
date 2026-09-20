@@ -49,6 +49,34 @@ export async function getBrowser({ headed = false, slowMo = 0 } = {}) {
   return browserInstance;
 }
 
+let cachedTimeOffset = null;
+let lastOffsetFetch = 0;
+
+/**
+ * Computes delta between local system time and store server time.
+ * Prevents clock-drift or local timezone drift from failing session challenge attestation.
+ */
+export async function getStoreTimeOffset() {
+  const now = Date.now();
+  if (cachedTimeOffset !== null && now - lastOffsetFetch < 300000) {
+    return cachedTimeOffset;
+  }
+  try {
+    const res = await fetch(`${ALLOWED_ORIGIN}/api/challenge`);
+    if (res.ok) {
+      const data = await res.json();
+      if (data.ts) {
+        cachedTimeOffset = data.ts - Date.now();
+        lastOffsetFetch = Date.now();
+        return cachedTimeOffset;
+      }
+    }
+  } catch (err) {
+    console.warn('[browserPool] Failed to sync store server time offset:', err.message);
+  }
+  return cachedTimeOffset || 0;
+}
+
 /**
  * Creates an isolated, clean BrowserContext per attempt.
  * Enforces route blocking for non-store origins to prevent SSRF and bound network.
@@ -108,18 +136,28 @@ export async function createAttemptContext(browser, { timeoutMs = 30000, injectF
     return route.continue();
   });
 
-  // Inject hook into window to capture decrypted authoritative quotes
-  await context.addInitScript(() => {
-    window.__quotes = [];
-    const origParse = JSON.parse;
-    JSON.parse = function(...args) {
-      const result = origParse.apply(this, args);
-      if (result && typeof result === 'object' && 'p' in result && 's' in result && 'c' in result) {
-        window.__quotes.push(result);
+  // Inject clock sync and hook into window to capture decrypted authoritative quotes
+  const timeOffset = await getStoreTimeOffset();
+  await context.addInitScript(`
+    (() => {
+      const offset = ${timeOffset};
+      if (offset !== 0) {
+        const origNow = Date.now;
+        Date.now = function() {
+          return origNow.call(Date) + offset;
+        };
       }
-      return result;
-    };
-  });
+      window.__quotes = [];
+      const origParse = JSON.parse;
+      JSON.parse = function(...args) {
+        const result = origParse.apply(this, args);
+        if (result && typeof result === 'object' && 'p' in result && 's' in result && 'c' in result) {
+          window.__quotes.push(result);
+        }
+        return result;
+      };
+    })();
+  `);
 
   return context;
 }
