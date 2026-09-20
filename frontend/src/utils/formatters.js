@@ -120,38 +120,3 @@ export function formatDistanceToNow(ts) {
   return `${diffDays} ${diffDays === 1 ? 'day' : 'days'} ago`;
 }
 
-/**
- * Calculate text for next run based on last run time + 2-hour interval.
- * Derives the schedule from the actual last run rather than assuming
- * a fixed UTC-hour grid, so it works regardless of cron timezone.
- * @param {string|null} lastRunStartedAt - ISO timestamp of the last run
- * @returns {string}
- */
-export function getNextRunText(lastRunStartedAt) {
-  const INTERVAL_MS = 2 * 60 * 60 * 1000; // 2 hours
-  const now = Date.now();
-
-  if (!lastRunStartedAt) {
-    return 'Next run: waiting for first cron';
-  }
-
-  let nextRun = new Date(lastRunStartedAt).getTime() + INTERVAL_MS;
-
-  // If that's already in the past, advance by intervals until it's in the future
-  while (nextRun <= now) {
-    nextRun += INTERVAL_MS;
-  }
-
-  const diffMs = nextRun - now;
-  const diffMinutes = Math.max(1, Math.ceil(diffMs / (60 * 1000)));
-  const h = Math.floor(diffMinutes / 60);
-  const m = diffMinutes % 60;
-
-  if (h > 0 && m > 0) {
-    return `Next run in ${h} h ${m} min`;
-  } else if (h > 0) {
-    return `Next run in ${h} h`;
-  } else {
-    return `Next run in ${m} min`;
-  }
-}

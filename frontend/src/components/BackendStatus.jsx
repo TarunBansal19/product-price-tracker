@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { api } from '../api.js';
-import { formatDistanceToNow, getNextRunText } from '../utils/formatters.js';
+import { formatDistanceToNow } from '../utils/formatters.js';
 
 export function BackendStatus({ onHealthUpdate }) {
   const [health, setHealth] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [nextRun, setNextRun] = useState('');
 
   const fetchHealth = async () => {
     try {
       const data = await api.getHealth();
       setHealth(data);
       setError(null);
-      setNextRun(getNextRunText(data?.db?.lastRun?.started_at));
       if (onHealthUpdate) {
         onHealthUpdate(data);
       }
@@ -32,15 +30,6 @@ export function BackendStatus({ onHealthUpdate }) {
     const interval = setInterval(fetchHealth, 30000);
     return () => clearInterval(interval);
   }, []);
-
-  useEffect(() => {
-    const updateCountdown = () => {
-      setNextRun(getNextRunText(health?.db?.lastRun?.started_at));
-    };
-    updateCountdown();
-    const timer = setInterval(updateCountdown, 30000);
-    return () => clearInterval(timer);
-  }, [health]);
 
   let dotClass = 'healthy';
   let statusText = 'Backend healthy';
@@ -67,7 +56,6 @@ export function BackendStatus({ onHealthUpdate }) {
       </div>
       <div className="backend-status-line2">
         <span>{lastRunText}</span>
-        <span>{nextRun}</span>
       </div>
       <div className="backend-status-line3">
         Scrapes run every 2 hours
