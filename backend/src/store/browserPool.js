@@ -96,7 +96,7 @@ export async function createAttemptContext(browser, { timeoutMs = 30000, injectF
     const url = request.url();
 
     // Injected fault simulation for CLI demonstration (only if requested)
-    if (injectFault && (url.includes('/prices') || url.includes('/price'))) {
+    if (injectFault && url.includes('/api/') && (url.includes('/prices') || url.includes('/price'))) {
       if (injectFault === 'hang') {
         console.log('[INJECTED FAULT] Simulating hang on price endpoint');
         // Do not respond; let withTimeout handle it
@@ -107,8 +107,8 @@ export async function createAttemptContext(browser, { timeoutMs = 30000, injectF
         return route.fulfill({ status: 500, body: 'Internal Server Error' });
       }
       if (injectFault === 'slow') {
-        console.log('[INJECTED FAULT] Simulating slow price response (delaying 5s)');
-        await new Promise(r => setTimeout(r, 5000));
+        console.log('[INJECTED FAULT] Simulating slow price response (delaying 3.5s)');
+        await new Promise(r => setTimeout(r, 3500));
       }
       if (injectFault === 'abort') {
         console.log('[INJECTED FAULT] Simulating network abort');

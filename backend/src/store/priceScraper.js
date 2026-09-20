@@ -192,7 +192,7 @@ export async function scrapeProductPrice({
               return /₹|Rs|\$|€/.test(text);
             },
             null,
-            { timeout: 15000 }
+            { timeout: 25000 }
           );
           await page.waitForTimeout(350);
         } catch (waitErr) {
