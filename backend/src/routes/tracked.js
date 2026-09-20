@@ -106,6 +106,16 @@ trackedRouter.post('/', mutationRateLimiter, validateBody(trackProductSchema), a
         });
       } catch (err) {
         console.warn(`[tracked] Initial scrape warning for product ${storeProductId}:`, err.message);
+        if (runId) {
+          await repo.finishRun({
+            runId,
+            status: 'interrupted',
+            productsTotal: 1,
+            productsOk: 0,
+            productsFailed: 1,
+            note: `Initial scrape failed: ${err.message}`
+          }).catch(() => {});
+        }
       }
     });
 
@@ -190,6 +200,16 @@ trackedRouter.post('/:id/scrape', manualScrapeLimiter, async (req, res, next) =>
         });
       } catch (err) {
         console.error(`[tracked] Manual scrape failed:`, err);
+        if (runId) {
+          await repo.finishRun({
+            runId,
+            status: 'interrupted',
+            productsTotal: 1,
+            productsOk: 0,
+            productsFailed: 1,
+            note: `Manual scrape failed: ${err.message}`
+          }).catch(() => {});
+        }
       } finally {
         await repo.releaseProduct(product.id).catch(() => {});
       }
