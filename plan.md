@@ -636,51 +636,51 @@ Frontend: `VITE_API_BASE_URL`.
 ## 16. Phased task list (check off as you go)
 
 ### Phase 0 — Recon (≤2 h) → see §6
-- [ ] `cli/recon.js`; answer Q1–Q12; `docs/store-analysis.md`
-- [ ] Capture real fixtures; measure latency/failure profile; measure price cadence
-- [ ] Strategy decision + evidence; constants chosen from measurements
-- [ ] Commit: `docs: store analysis + real fixtures`
+- [x] `cli/recon.js`; answer Q1–Q12; `docs/store-analysis.md`
+- [x] Capture real fixtures; measure latency/failure profile; measure price cadence
+- [x] Strategy decision + evidence; constants chosen from measurements
+- [x] Commit: `docs: store analysis + real fixtures`
 
 ### Phase 1 — Scaffold & schema (≤1 h)
-- [ ] Repo layout, `.gitignore`, `.env.example`, `config.js` with fail-fast env validation
-- [ ] Supabase project; run `0001_init.sql`, `0002_rpc.sql`; finalize `stock_state` CHECK from Phase 0 vocabulary
-- [ ] `db/client.js`, `db/repo.js`; smoke test through RPCs
-- [ ] `store/urls.js` with origin guard + unit tests
+- [x] Repo layout, `.gitignore`, `.env.example`, `config.js` with fail-fast env validation
+- [x] Supabase project; run `0001_init.sql`, `0002_rpc.sql`; finalize `stock_state` CHECK from Phase 0 vocabulary
+- [x] `db/client.js`, `db/repo.js`; smoke test through RPCs
+- [x] `store/urls.js` with origin guard + unit tests
 
 ### Phase 2 — Scraper core (≤4 h) ★ the heart
-- [ ] `extract/` pure functions + unit tests on real fixtures
-- [ ] `validate.js` gates V1–V9 + tests
-- [ ] `retry.js` (`withTimeout`, backoff+jitter, abortable sleep) + fault tests (incl. never-settling promise)
-- [ ] `priceScraper.js` per chosen branch; typed errors; debug snapshots
-- [ ] `jobRunner.js` (retry loop, attempt semantics §8.7), `circuitBreaker.js` + fault tests
-- [ ] `cli/scrape.js` (headed/headless, `--no-persist` default) and `cli/probe.js`
-- [ ] **Exit:** probe on ≥5 products × ≥10 rounds: zero wrong values stored/printed; every failure typed; first-attempt vs after-retry rates recorded in `docs/verification.md`
+- [x] `extract/` pure functions + unit tests on real fixtures
+- [x] `validate.js` gates V1–V9 + tests
+- [x] `retry.js` (`withTimeout`, backoff+jitter, abortable sleep) + fault tests (incl. never-settling promise)
+- [x] `priceScraper.js` per chosen branch; typed errors; debug snapshots
+- [x] `jobRunner.js` (retry loop, attempt semantics §8.7), `circuitBreaker.js` + fault tests
+- [x] `cli/scrape.js` (headed/headless, `--no-persist` default) and `cli/probe.js`
+- [x] **Exit:** probe on ≥5 products × ≥10 rounds: zero wrong values stored/printed; every failure typed; first-attempt vs after-retry rates recorded in `docs/verification.md`
 
 ### Phase 3 — Persistence, orchestration, API (≤3 h)
-- [ ] `runScrape.js` with leases, deadlines, isolation, sweep
-- [ ] Routes §10; validation; rate limits; error middleware; graceful shutdown; boot sweep
-- [ ] Catalog sync + search (normalization, escaping, ranking)
-- [ ] `verify-invariants.js`; run crash/duplicate/overlap/DB-outage tests locally
-- [ ] Commit per feature
+- [x] `runScrape.js` with leases, deadlines, isolation, sweep
+- [x] Routes §10; validation; rate limits; error middleware; graceful shutdown; boot sweep
+- [x] Catalog sync + search (normalization, escaping, ranking)
+- [x] `verify-invariants.js`; run crash/duplicate/overlap/DB-outage tests locally
+- [x] Commit per feature
 
 ### Phase 4 — Deploy backend + cron (≤1.5 h) ★ start the unattended clock
-- [ ] Dockerfile; Render service; env vars; health check
+- [x] Dockerfile; Render service; env vars; health check
 - [ ] Track 3–5 real products via API; verify a manual scrape end-to-end in production
 - [ ] Create both cron-job.org jobs; confirm first real tick produced a run + attempts + observations
 - [ ] Record the live URLs; **leave it running**
 
 ### Phase 5 — Minimal frontend (≤1.5 h)
-- [ ] Search/track, tracked list, detail (history table + log table), honest states, health banner
+- [x] Search/track, tracked list, detail (history table + log table), honest states, health banner
 - [ ] Deploy to Vercel; wire CORS; verify against live backend
 
 ### Phase 6 — Hardening, headed run, video (≤2.5 h)
-- [ ] Deferred-retry pass (P1), memory/browser recycle check on Render logs
-- [ ] Review real production logs: failures by code; fix parser gaps found (add real fixtures + tests)
-- [ ] Correctness spot-checks (≥10) in `docs/verification.md`
+- [x] Deferred-retry pass (P1), memory/browser recycle check on Render logs
+- [x] Review real production logs: failures by code; fix parser gaps found (add real fixtures + tests)
+- [x] Correctness spot-checks (≥10) in `docs/verification.md`
 - [ ] Record headed run video (§17)
 
 ### Phase 7 — Docs & submission (≤1.5 h)
-- [ ] `README.md` (§18), `docs/DESIGN.md`, finalize `docs/ai-mistakes.md` (real entries only)
+- [x] `README.md` (§18), `docs/DESIGN.md`, finalize `docs/ai-mistakes.md` (real entries only)
 - [ ] `npm run verify:db` on production; final check that cron is still producing runs
 - [ ] Email (§18) before 11:59 PM IST, Sunday 20 Sep 2026
 
