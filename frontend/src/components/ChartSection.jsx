@@ -154,8 +154,14 @@ export function ChartSection({
 
     // Compute nice round bounds
     const step = Math.max(100, Math.ceil(span / 4 / 100) * 100);
-    const low = Math.max(0, Math.floor(minP / step) * step);
-    const high = Math.ceil(maxP / step) * step;
+    let low = Math.max(0, Math.floor(minP / step) * step);
+    let high = Math.ceil(maxP / step) * step;
+
+    // Prevent flat range when price is unchanged/constant
+    if (high <= low) {
+      high = low + step * 2;
+      low = Math.max(0, low - step * 2);
+    }
 
     const ticks = [];
     const numSteps = Math.max(1, Math.round((high - low) / step));
@@ -652,6 +658,20 @@ export function ChartSection({
                 />
               );
             })}
+
+            {/* If single observation: draw horizontal guideline across the chart */}
+            {sortedObs.length === 1 && (
+              <line
+                x1={xStart}
+                y1={getY(Number(sortedObs[0].price_minor) / 100)}
+                x2={xEnd}
+                y2={getY(Number(sortedObs[0].price_minor) / 100)}
+                stroke="var(--ink)"
+                strokeWidth="1.5"
+                strokeDasharray="4 4"
+                strokeOpacity="0.5"
+              />
+            )}
 
             {/* End Dot on latest observation */}
             {sortedObs.length > 0 && (

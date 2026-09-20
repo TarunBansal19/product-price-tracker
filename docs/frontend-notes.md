@@ -76,6 +76,20 @@ This document logs design and implementation choices, adaptations, or edge-case 
   - `prefers-reduced-motion: reduce` resets all transitions and animations to 0.01ms.
   - Color is never the sole indicator: status badges include text labels and dots; scrape strip bars use filled, dot-topped, and hollow geometric shapes.
 
+## Dark Mode & Chart Robustness Enhancements
+- **Dark Mode System**:
+  - Toggle button with plain, clean minimalist SVG icons (Sun for switching to light, Moon for switching to dark — zero emojis).
+  - Positioned at the top right of the rail header on desktop and aligned on mobile/tablet top bar.
+  - Complete dark theme tokens configured under `[data-theme="dark"]` (`--sheet: #0E161B`, `--paper: #162026`, `--ink: #EDF3F1`, etc.).
+  - Persists preference across sessions via `localStorage` with fallback to `prefers-color-scheme`.
+  - Full smooth CSS transitions (`0.2s ease`) on backgrounds, borders, and colors across all components.
+  - SVG tally mark wordmark dynamically uses `currentColor` and `var(--live)` to seamlessly adapt to both themes.
+- **Chart Robustness**:
+  - Price scaling algorithm now guarantees clean round bounds even when price is constant / flat (`high <= low` condition guarded).
+  - Added horizontal reference dashed guideline when a product has a single observation point.
+  - Hover detection seamlessly locates either the nearest observation or scrape attempt slot.
+
+
 
 
 

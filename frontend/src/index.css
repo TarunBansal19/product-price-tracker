@@ -30,6 +30,32 @@
   --shadow-dropdown: 0 8px 24px rgba(19, 35, 43, 0.12);
 }
 
+[data-theme="dark"] {
+  /* Colours */
+  --paper: #162026;
+  --sheet: #0E161B;
+  --ink: #EDF3F1;
+  --slate: #9BA9AE;
+  --muted: #64737A;
+  --grid: #25333A;
+  --live: #14B894;
+  --live-tint: #133930;
+  --amber: #EAA72E;
+  --amber-tint: #3E2F16;
+  --red: #E85B4B;
+  --red-tint: #401B17;
+  --quiet-tint: #1F2D33;
+
+  /* Chart-only colours */
+  --stock-in: #184D40;
+  --stock-low: #57411B;
+  --stock-out: #2E3B40;
+  --chart-unknown-stroke: #415157;
+  --day-ticks: #46575E;
+
+  --shadow-dropdown: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -45,6 +71,7 @@ html, body {
   line-height: 1.45;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* Tabular numbers for prices, times, and table numbers */
@@ -94,6 +121,40 @@ button:disabled {
   gap: 24px;
   overflow-y: auto;
   border-right: 1px solid var(--grid);
+}
+
+/* Rail Header Top Row */
+.rail-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Theme Toggle Button (Plain SVG Sun/Moon) */
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--grid);
+  background-color: var(--sheet);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  flex-shrink: 0;
+}
+
+.theme-toggle-btn:hover {
+  background-color: var(--paper);
+  border-color: var(--slate);
+}
+
+.theme-toggle-btn:focus-visible {
+  outline: 2px solid var(--live);
+  outline-offset: 2px;
 }
 
 /* Wordmark */
