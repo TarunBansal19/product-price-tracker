@@ -84,10 +84,13 @@ This document logs design and implementation choices, adaptations, or edge-case 
   - Persists preference across sessions via `localStorage` with fallback to `prefers-color-scheme`.
   - Full smooth CSS transitions (`0.2s ease`) on backgrounds, borders, and colors across all components.
   - SVG tally mark wordmark dynamically uses `currentColor` and `var(--live)` to seamlessly adapt to both themes.
+  - **Tooltip Dark Mode Contrast**: Explicitly scoped `--tooltip-bg`, `--tooltip-border`, `--tooltip-text`, `--tooltip-time`, `--tooltip-meta`, and `--tooltip-outcome` variables so tooltip background is high-contrast deep slate (`#1B262C` with border `#2E3E47`) and price text is crisp pure white `#FFFFFF` in both light and dark modes, preventing white-on-white text collision.
+  - **Dot Click & Touch Interaction**: Added click handler on chart slots/container so tapping or clicking on dots toggles/locks the tooltip on desktop and mobile.
 - **Chart Robustness**:
   - Price scaling algorithm now guarantees clean round bounds even when price is constant / flat (`high <= low` condition guarded).
   - Added horizontal reference dashed guideline when a product has a single observation point.
   - Hover detection seamlessly locates either the nearest observation or scrape attempt slot.
+
 
 
 

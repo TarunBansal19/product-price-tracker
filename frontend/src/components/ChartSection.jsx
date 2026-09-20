@@ -361,6 +361,28 @@ export function ChartSection({
     }
   };
 
+  const handleChartClick = (e) => {
+    if (!containerRef.current || visibleSlots.length === 0) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+
+    let closestIdx = -1;
+    let closestDist = Infinity;
+
+    visibleSlots.forEach((slot, idx) => {
+      const sx = getX(slot.time);
+      const dist = Math.abs(clickX - sx);
+      if (dist < closestDist) {
+        closestDist = dist;
+        closestIdx = idx;
+      }
+    });
+
+    if (closestDist < 40) {
+      setHoverIndex((prev) => (prev === closestIdx ? null : closestIdx));
+    }
+  };
+
   return (
     <section className="chart-section" aria-labelledby="chart-section-title">
       {/* Header Row */}
@@ -466,6 +488,7 @@ export function ChartSection({
           ref={containerRef}
           onMouseMove={handleMouseMove}
           onMouseLeave={() => setHoverIndex(null)}
+          onClick={handleChartClick}
           onKeyDown={handleKeyDown}
           tabIndex={0}
           role="region"
@@ -700,7 +723,7 @@ export function ChartSection({
                     cx={activeHover.x}
                     cy={activeHover.y}
                     r="5.5"
-                    fill="#FFFFFF"
+                    fill="var(--sheet)"
                     stroke="var(--ink)"
                     strokeWidth="2"
                   />
